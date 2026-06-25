@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="da">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Company X Signal - Agent Assist</title>
+    <link rel="stylesheet" href="../agent-assist.css" />
+  </head>
+  <body>
+    <header class="agent-header">
+      <a class="brand" href="../index.html" aria-label="Company X forside">
+        <span class="brand-symbol" aria-hidden="true"><span></span></span>
+        <span class="brand-text">
+          <strong>Company X</strong>
+          <span>Telecommunications</span>
+        </span>
+      </a>
+
+      <div class="agent-product">
+        <span>Internt serviceværktøj</span>
+        <strong>Company X Signal</strong>
+      </div>
+
+      <div class="agent-user">
+        <span>Logget ind som</span>
+        <strong>Mikkel Holm · Billing Support</strong>
+      </div>
+    </header>
+
+    <main class="agent-shell">
+      <section class="agent-hero">
+        <div>
+          <p>Company X Signal</p>
+          <h1>Find det rigtige svar, mens kunden er i røret</h1>
+          <span>
+            Internt cockpit til kundeservice, hvor Signal samler de nødvendige
+            opslag på tværs af systemer, forklarer afvigelsen og giver Mikkel et
+            muligt svar, han kan godkende.
+          </span>
+        </div>
+      </section>
+
+      <section class="agent-workspace">
+        <aside class="call-panel">
+          <div class="live-call">
+            <span class="pulse" aria-hidden="true"></span>
+            <div>
+              <span id="callState">Indgående opkald</span>
+              <strong id="callDuration">02:14</strong>
+            </div>
+          </div>
+
+          <div class="call-timeline" aria-label="Opkaldstider">
+            <div>
+              <span>Ventetid</span>
+              <strong>04:38</strong>
+            </div>
+            <div>
+              <span>SLA</span>
+              <strong>Normal</strong>
+            </div>
+          </div>
+
+          <div class="caller-card">
+            <span>Nummer fra opkald</span>
+            <strong>22 41 08 96</strong>
+            <small>Mobil · Privatkunde</small>
+          </div>
+
+          <div class="caller-issue">
+            <span>Kundens spørgsmål</span>
+            <p>Hvorfor er min regning højere end normalt?</p>
+          </div>
+
+          <div class="agent-search">
+            <label for="lookupInput">Telefonnummer eller kundenummer</label>
+            <div>
+              <input id="lookupInput" value="22 41 08 96" />
+              <button id="lookupButton" type="button">Slå op</button>
+            </div>
+          </div>
+
+          <div class="customer-mini" id="customerMini">
+            <span>Kunde</span>
+            <strong>Afventer opslag</strong>
+            <small>Signal samler relevante kilder, når opkaldet matches.</small>
+          </div>
+        </aside>
+
+        <section class="signal-panel-main">
+          <div class="workspace-top">
+            <div>
+              <span>Agent workspace</span>
+              <h2>Aktuel kundehenvendelse</h2>
+            </div>
+            <div class="case-status" id="caseStatus" aria-live="polite">Klar til opslag</div>
+          </div>
+
+          <div class="workflow-options" aria-label="Henvendelsestyper">
+            <button class="workflow-card active" type="button">
+              <span>Valgt flow</span>
+              <strong>Fakturaafklaring</strong>
+              <em>Regning højere end normalt</em>
+            </button>
+            <button class="workflow-card" type="button">
+              <span>Muligt flow</span>
+              <strong>Driftsstatus</strong>
+              <em>Dækning, fiber eller udfald</em>
+            </button>
+            <button class="workflow-card" type="button">
+              <span>Muligt flow</span>
+              <strong>Abonnement</strong>
+              <em>Tilvalg, skift eller binding</em>
+            </button>
+            <button class="workflow-card" type="button">
+              <span>Muligt flow</span>
+              <strong>Opsigelse</strong>
+              <em>Årsag, tilbud og næste skridt</em>
+            </button>
+          </div>
+
+          <div class="system-grid" aria-label="Systemopslag">
+            <article class="system-card" id="crmCard">
+              <span>CRM</span>
+              <strong>Kundeprofil</strong>
+              <em>Afventer opslag</em>
+            </article>
+            <article class="system-card" id="invoiceCard">
+              <span>Faktura</span>
+              <strong>Seneste regning</strong>
+              <em>Afventer opslag</em>
+            </article>
+            <article class="system-card" id="usageCard">
+              <span>Forbrug</span>
+              <strong>Tilvalg og data</strong>
+              <em>Afventer opslag</em>
+            </article>
+            <article class="system-card" id="historyCard">
+              <span>Historik</span>
+              <strong>Tidligere sager</strong>
+              <em>Afventer opslag</em>
+            </article>
+            <article class="system-card" id="paymentCard">
+              <span>Betaling</span>
+              <strong>Betalinger</strong>
+              <em>Afventer opslag</em>
+            </article>
+            <article class="system-card" id="productCard">
+              <span>Produkt</span>
+              <strong>Priser og kampagner</strong>
+              <em>Afventer opslag</em>
+            </article>
+            <article class="system-card" id="contactCard">
+              <span>Kontaktvalg</span>
+              <strong>Mail og samtykke</strong>
+              <em>Afventer opslag</em>
+            </article>
+            <article class="system-card" id="driftCard">
+              <span>Drift</span>
+              <strong>Dækning og udfald</strong>
+              <em>Afventer opslag</em>
+            </article>
+          </div>
+
+          <div class="analysis-panel hidden" id="analysisPanel" aria-live="polite">
+            <span class="analysis-spinner" aria-hidden="true"></span>
+            <div>
+              <strong>Signal analyserer regningsafvigelse</strong>
+              <p>
+                Matcher aktuel faktura med kundens normalpris, forbrugslog,
+                produktregler og kontaktvalg før forklaringen vises.
+              </p>
+            </div>
+          </div>
+
+          <div class="result-area hidden" id="resultArea">
+            <div class="customer-strip">
+              <div>
+                <span>Kunde</span>
+                <strong>Maria Andersen</strong>
+              </div>
+              <div>
+                <span>Kundenummer</span>
+                <strong>CX-10488291</strong>
+              </div>
+              <div>
+                <span>Faktura</span>
+                <strong>INV-2026-05-8821</strong>
+                <small>Maj 2026 · reference i fakturasystemet</small>
+              </div>
+              <div>
+                <span>Kontakt</span>
+                <strong>maria.andersen@email.dk</strong>
+                <small>Samtykke til servicebeskeder er aktivt</small>
+              </div>
+            </div>
+
+            <div class="bill-explanation">
+              <div class="explanation-copy">
+                <span>Forklaring</span>
+                <strong>Regningen er 150 kr. højere end normalt</strong>
+                <p>
+                  Signal har beregnet afvigelsen: maj-faktura 549 kr. minus
+                  kundens normalpris 399 kr. giver +150 kr. Årsagen matches til
+                  ekstra data og en udløbet intropris på streamingpakken.
+                </p>
+              </div>
+              <div class="variance-card">
+                <span>Afvigelse</span>
+                <strong>+150 kr.</strong>
+              </div>
+            </div>
+
+            <div class="line-items">
+              <div>
+                <span>Ekstra data købt 18. maj</span>
+                <b>+100 kr.</b>
+              </div>
+              <div>
+                <span>Streamingpakke intropris udløbet</span>
+                <b>+50 kr.</b>
+              </div>
+              <div class="total">
+                <span>Samlet afvigelse</span>
+                <b>+150 kr.</b>
+              </div>
+            </div>
+
+            <div class="customer-context">
+              <div class="context-card">
+                <span>Seneste kundefeedback</span>
+                <strong>4,6 / 5</strong>
+                <small>Sidste supportkontakt blev markeret som løst.</small>
+              </div>
+              <div class="context-card">
+                <span>Anbefalet handling</span>
+                <strong>Forklar og send oversigt</strong>
+                <small>Ingen kompensation foreslås, da afvigelsen er dokumenteret.</small>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <aside class="answer-panel">
+          <div class="answer-card">
+            <span>Muligt svar</span>
+            <p id="suggestedAnswer">
+              Slå kunden op for at få et kvalitetssikret svar, Mikkel kan bruge i
+              samtalen.
+            </p>
+            <div class="answer-meta" id="answerMeta">
+              Afventer datagrundlag · Mikkel godkender før afsendelse
+            </div>
+            <button type="button" id="sendEmail">Godkend og send mail</button>
+          </div>
+
+          <div class="refinement-card">
+            <span>Svarværktøj</span>
+            <strong>Tilpas svaret, før det sendes</strong>
+            <p>
+              Mikkel kan gøre svaret kortere, mere empatisk eller mere
+              kildebaseret uden at ændre datagrundlaget.
+            </p>
+            <div class="refinement-actions" aria-label="Tilpas muligt svar">
+              <button type="button" data-tone="short">Kortere</button>
+              <button type="button" data-tone="empathy">Mere empatisk</button>
+              <button type="button" data-tone="sources">Vis kilder</button>
+            </div>
+          </div>
+
+          <div class="note-card">
+            <span>Sagsnotat</span>
+            <div id="caseNote" class="case-note-body">
+              Intet notat endnu. Signal opretter et kort notat, når data er matchet.
+            </div>
+            <button type="button" id="createCase">Opret sag</button>
+          </div>
+
+          <div class="finish-card">
+            <span>Afslut samtale</span>
+            <p>
+              Når kunden har fået svar, låser Signal sagsnotatet, gemmer
+              konteksten i CRM og opdaterer teamdashboardet.
+            </p>
+            <button type="button" id="finishCall">Afslut samtale</button>
+            <a class="dashboard-link hidden" id="dashboardLink" href="../dashboard/">
+              Åbn teamdashboard
+            </a>
+          </div>
+
+          <div class="source-card">
+            <span>Datagrundlag</span>
+            <strong>8 kilder matchet</strong>
+            <p>
+              Alle viste felter er logget med kilde, tidspunkt og agentens
+              endelige handling, så data kan bruges til kvalitetssikring.
+            </p>
+          </div>
+        </aside>
+      </section>
+
+    </main>
+
+    <script src="../agent-assist.js"></script>
+  </body>
+</html>
