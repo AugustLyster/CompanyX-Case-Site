@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-labelledby="title">
+  <title>Company X</title>
+  <rect width="120" height="120" rx="8" fill="#061B3F"/>
+  <rect x="52" y="14" width="16" height="22" fill="#2FC3D7"/>
+  <rect x="52" y="84" width="16" height="22" fill="#2FC3D7"/>
+  <path d="M35 34L86 85" stroke="#FFFFFF" stroke-width="12" stroke-linecap="square"/>
+  <path d="M85 34L34 85" stroke="#FFFFFF" stroke-width="12" stroke-linecap="square"/>
+</svg>

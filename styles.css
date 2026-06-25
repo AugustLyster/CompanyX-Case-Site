@@ -89,6 +89,13 @@ textarea {
   padding-right: 30px;
 }
 
+.brand-logo {
+  display: block;
+  width: 44px;
+  height: 44px;
+  flex: 0 0 auto;
+}
+
 .brand-symbol {
   position: relative;
   display: block;
@@ -1016,6 +1023,11 @@ textarea {
   }
 
   .brand-symbol {
+    width: 38px;
+    height: 38px;
+  }
+
+  .brand-logo {
     width: 38px;
     height: 38px;
   }
