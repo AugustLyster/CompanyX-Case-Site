@@ -119,8 +119,17 @@ input {
 }
 
 .brand-text strong {
-  font-size: 1.3rem;
+  font-size: 1.18rem;
+  line-height: 1.05;
   letter-spacing: 0;
+}
+
+.brand-text em {
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-style: normal;
+  font-weight: 850;
+  letter-spacing: 0.03em;
 }
 
 .brand-text span,
@@ -136,22 +145,22 @@ input {
 .agent-product {
   position: relative;
   display: grid;
-  gap: 2px;
-  min-width: 276px;
+  gap: 1px;
+  min-width: 235px;
   padding: 10px 18px 10px 22px;
   overflow: hidden;
-  border: 1px solid rgba(47, 195, 215, 0.42);
-  border-radius: 10px;
+  border: 1px solid rgba(47, 195, 215, 0.3);
+  border-radius: 9px;
   background:
-    linear-gradient(90deg, rgba(47, 195, 215, 0.16), transparent 42%),
-    rgba(255, 255, 255, 0.94);
-  box-shadow: 0 10px 24px rgba(6, 27, 63, 0.09);
+    linear-gradient(90deg, rgba(47, 195, 215, 0.1), transparent 44%),
+    rgba(255, 255, 255, 0.84);
+  box-shadow: 0 8px 18px rgba(6, 27, 63, 0.06);
 }
 
 .agent-product::before {
   position: absolute;
-  top: 10px;
-  bottom: 10px;
+  top: 9px;
+  bottom: 9px;
   left: 0;
   width: 4px;
   border-radius: 0 6px 6px 0;
@@ -161,8 +170,9 @@ input {
 
 .agent-product strong {
   color: var(--navy);
-  font-size: 1.02rem;
+  font-size: 0.9rem;
   line-height: 1.08;
+  text-transform: uppercase;
 }
 
 .agent-product small {
@@ -185,18 +195,18 @@ input {
 
 .agent-shell {
   width: min(1780px, calc(100% - 48px));
-  margin: 28px auto 52px;
+  margin: 22px auto 52px;
 }
 
 .agent-hero {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(260px, 360px);
-  gap: 32px;
+  grid-template-columns: minmax(0, 1fr) minmax(230px, 300px);
+  gap: 28px;
   align-items: center;
-  min-height: 286px;
-  padding: 42px clamp(28px, 4vw, 54px);
+  min-height: 224px;
+  padding: 32px clamp(26px, 3.4vw, 44px);
   overflow: hidden;
-  border-radius: 18px;
+  border-radius: 14px;
   color: var(--white);
   background:
     linear-gradient(100deg, rgba(6, 27, 63, 0.98) 0%, rgba(9, 42, 92, 0.96) 52%, rgba(9, 42, 92, 0.72) 100%),
@@ -205,48 +215,48 @@ input {
 }
 
 .agent-hero p {
-  margin: 0 0 10px;
+  margin: 0 0 8px;
   color: var(--cyan);
-  font-size: 1rem;
+  font-size: 0.86rem;
   font-weight: 900;
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
 .agent-hero h1 {
-  max-width: 920px;
+  max-width: 790px;
   margin: 0;
-  font-size: clamp(2.75rem, 4.7vw, 5.8rem);
-  line-height: 0.98;
+  font-size: clamp(2.25rem, 3.45vw, 4.35rem);
+  line-height: 1.0;
   letter-spacing: 0;
 }
 
 .agent-hero span {
   display: block;
-  max-width: 790px;
-  margin-top: 18px;
+  max-width: 760px;
+  margin-top: 14px;
   color: rgba(255, 255, 255, 0.82);
-  font-size: clamp(1rem, 1.2vw, 1.25rem);
-  line-height: 1.45;
+  font-size: clamp(0.96rem, 1.05vw, 1.14rem);
+  line-height: 1.42;
 }
 
 .hero-badges {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 22px;
+  gap: 8px;
+  margin-top: 16px;
 }
 
 .hero-badges strong {
   display: inline-flex;
   align-items: center;
-  min-height: 34px;
-  padding: 8px 13px;
+  min-height: 30px;
+  padding: 7px 11px;
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 8px;
   color: var(--white);
   background: rgba(255, 255, 255, 0.1);
-  font-size: 0.82rem;
+  font-size: 0.74rem;
   font-weight: 850;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -254,10 +264,10 @@ input {
 
 .internal-agent-card {
   display: grid;
-  gap: 10px;
+  gap: 7px;
   justify-self: end;
-  width: min(360px, 100%);
-  padding: 28px 30px;
+  width: min(300px, 100%);
+  padding: 22px 24px;
   border: 1px solid rgba(255, 255, 255, 0.24);
   border-radius: 16px;
   background: rgba(255, 255, 255, 0.1);
@@ -266,7 +276,7 @@ input {
 
 .internal-agent-card span {
   color: var(--cyan);
-  font-size: 0.9rem;
+  font-size: 0.76rem;
   font-weight: 950;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -274,8 +284,8 @@ input {
 
 .internal-agent-card strong {
   color: var(--white);
-  font-size: clamp(2.1rem, 3vw, 3.35rem);
-  line-height: 0.96;
+  font-size: clamp(1.8rem, 2.3vw, 2.7rem);
+  line-height: 0.98;
 }
 
 .internal-agent-card em {
