@@ -136,8 +136,8 @@ input {
 .agent-product {
   display: grid;
   gap: 4px;
-  min-width: 270px;
-  padding: 12px 20px;
+  min-width: 310px;
+  padding: 13px 22px;
   border: 1px solid rgba(47, 195, 215, 0.32);
   border-radius: 12px;
   background: linear-gradient(135deg, rgba(216, 245, 248, 0.78), rgba(255, 255, 255, 0.92));
@@ -146,7 +146,13 @@ input {
 
 .agent-product strong {
   color: var(--navy);
-  font-size: 1.16rem;
+  font-size: 1.22rem;
+}
+
+.agent-product small {
+  color: var(--navy-2);
+  font-size: 0.78rem;
+  font-weight: 850;
 }
 
 .agent-user {
@@ -168,10 +174,11 @@ input {
 
 .agent-hero {
   display: grid;
-  grid-template-columns: minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 360px);
   gap: 32px;
-  align-items: end;
-  padding: 36px clamp(26px, 4vw, 48px);
+  align-items: center;
+  min-height: 286px;
+  padding: 42px clamp(28px, 4vw, 54px);
   overflow: hidden;
   border-radius: 18px;
   color: var(--white);
@@ -184,16 +191,16 @@ input {
 .agent-hero p {
   margin: 0 0 10px;
   color: var(--cyan);
-  font-size: 0.95rem;
+  font-size: 1rem;
   font-weight: 900;
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
 .agent-hero h1 {
-  max-width: 850px;
+  max-width: 920px;
   margin: 0;
-  font-size: clamp(2.3rem, 4vw, 4.7rem);
+  font-size: clamp(2.75rem, 4.7vw, 5.8rem);
   line-height: 0.98;
   letter-spacing: 0;
 }
@@ -205,6 +212,60 @@ input {
   color: rgba(255, 255, 255, 0.82);
   font-size: clamp(1rem, 1.2vw, 1.25rem);
   line-height: 1.45;
+}
+
+.hero-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.hero-badges strong {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 8px 13px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 8px;
+  color: var(--white);
+  background: rgba(255, 255, 255, 0.1);
+  font-size: 0.82rem;
+  font-weight: 850;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.internal-agent-card {
+  display: grid;
+  gap: 10px;
+  justify-self: end;
+  width: min(360px, 100%);
+  padding: 28px 30px;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 44px rgba(0, 0, 0, 0.16);
+}
+
+.internal-agent-card span {
+  color: var(--cyan);
+  font-size: 0.9rem;
+  font-weight: 950;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.internal-agent-card strong {
+  color: var(--white);
+  font-size: clamp(2.1rem, 3vw, 3.35rem);
+  line-height: 0.96;
+}
+
+.internal-agent-card em {
+  color: rgba(255, 255, 255, 0.76);
+  font-style: normal;
+  font-weight: 750;
 }
 
 .agent-workspace {
@@ -1208,6 +1269,10 @@ input {
 
   .agent-hero {
     grid-template-columns: 1fr;
+  }
+
+  .internal-agent-card {
+    justify-self: start;
   }
 
   .agent-workspace {
