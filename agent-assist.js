@@ -128,13 +128,13 @@ function resetLookup() {
   customerMini.innerHTML = `
     <span>Kunde</span>
     <strong>Afventer opslag</strong>
-    <small>Signal samler relevante kilder, når opkaldet matches.</small>
+    <small>SIGNAL AGENT samler relevante kilder, når opkaldet matches.</small>
   `;
   suggestedAnswer.textContent =
     "Slå kunden op for at få et kvalitetssikret svar, Mikkel kan bruge i samtalen.";
   answerMeta.textContent = "Afventer datagrundlag · Mikkel godkender før afsendelse";
   caseNote.textContent =
-    "Intet notat endnu. Signal opretter et kort notat, når data er matchet.";
+    "Intet notat endnu. SIGNAL AGENT opretter et kort notat, når data er matchet.";
   sendEmail.textContent = "Godkend og send mail";
   createCase.textContent = "Opret sag";
   finishCall.textContent = "Afslut samtale";

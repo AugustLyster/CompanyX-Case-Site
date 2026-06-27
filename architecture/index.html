@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="da">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Company X SIGNAL AGENT - bagvedliggende flow</title>
+    <style>
+      :root {
+        --navy: #061b3f;
+        --navy-2: #092a5c;
+        --cyan: #2fc3d7;
+        --cyan-soft: #d8f5f8;
+        --ink: #071a3a;
+        --muted: #66728a;
+        --line: #d8e2ee;
+        --paper: #f5f8fc;
+        --white: #ffffff;
+        --shadow: 0 16px 34px rgba(6, 27, 63, 0.12);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        background: #eef3f8;
+        font-family:
+          Arial,
+          Helvetica,
+          sans-serif;
+      }
+
+      .slide {
+        position: relative;
+        width: 100%;
+        min-height: 100vh;
+        margin: 0 auto;
+        overflow: hidden;
+        background:
+          linear-gradient(90deg, rgba(216, 245, 248, 0.62), transparent 28%),
+          var(--white);
+      }
+
+      .topbar {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        padding: 72px 92px 0;
+      }
+
+      .brand {
+        display: flex;
+        gap: 18px;
+        align-items: center;
+      }
+
+      .logo {
+        display: block;
+        width: 58px;
+        height: 58px;
+        border-radius: 8px;
+        object-fit: cover;
+        box-shadow: 0 12px 24px rgba(6, 27, 63, 0.18);
+      }
+
+      .brand strong {
+        display: block;
+        color: var(--navy);
+        font-size: 28px;
+        line-height: 1;
+      }
+
+      .brand span {
+        color: var(--muted);
+        font-size: 13px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .classification {
+        color: #8b8f97;
+        font-size: 16px;
+      }
+
+      .kicker {
+        margin: 64px 0 0 92px;
+        color: var(--cyan);
+        font-size: 34px;
+        font-style: italic;
+        font-weight: 800;
+      }
+
+      h1 {
+        width: min(1100px, calc(100% - 184px));
+        margin: 22px 0 0 92px;
+        color: var(--navy);
+        font-family: "Arial Narrow", Arial, sans-serif;
+        font-size: clamp(54px, 4.1vw, 70px);
+        line-height: 0.94;
+        letter-spacing: 0;
+      }
+
+      .lead {
+        width: min(1120px, calc(100% - 184px));
+        margin: 26px 0 0 92px;
+        color: var(--ink);
+        font-size: 27px;
+        line-height: 1.35;
+      }
+
+      .architecture {
+        position: relative;
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 18px;
+        margin: 54px 78px 0;
+        align-items: stretch;
+      }
+
+      .lane {
+        position: relative;
+        min-height: 430px;
+        padding: 24px 22px 22px;
+        border: 1px solid var(--line);
+        border-radius: 13px;
+        background: rgba(255, 255, 255, 0.94);
+        box-shadow: var(--shadow);
+      }
+
+      .lane::before {
+        position: absolute;
+        top: 22px;
+        bottom: 22px;
+        left: 0;
+        width: 8px;
+        border-radius: 0 8px 8px 0;
+        background: var(--cyan);
+        content: "";
+      }
+
+      .lane.dark {
+        color: var(--white);
+        border-color: transparent;
+        background: linear-gradient(145deg, var(--navy), var(--navy-2));
+      }
+
+      .lane.dark::before {
+        background: var(--cyan);
+      }
+
+      .lane.dark .eyebrow,
+      .lane.dark p,
+      .lane.dark li {
+        color: rgba(255, 255, 255, 0.76);
+      }
+
+      .lane.dark h2 {
+        color: var(--white);
+      }
+
+      .eyebrow {
+        margin-left: 20px;
+        color: var(--muted);
+        font-size: 13px;
+        font-weight: 900;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      h2 {
+        margin: 12px 0 0 20px;
+        color: var(--navy);
+        font-size: 28px;
+        line-height: 1.08;
+      }
+
+      p {
+        margin: 16px 0 0 20px;
+        color: var(--muted);
+        font-size: 18px;
+        line-height: 1.35;
+      }
+
+      .data-list {
+        display: grid;
+        gap: 10px;
+        margin: 20px 0 0 20px;
+      }
+
+      .data-list b {
+        display: block;
+        padding: 11px 13px;
+        color: var(--navy);
+        border: 1px solid rgba(47, 195, 215, 0.32);
+        border-radius: 9px;
+        background: rgba(216, 245, 248, 0.6);
+        font-size: 16px;
+      }
+
+      .lane.dark .data-list b {
+        color: var(--white);
+        border-color: rgba(255, 255, 255, 0.18);
+        background: rgba(255, 255, 255, 0.11);
+      }
+
+      .signal-core {
+        display: grid;
+        gap: 13px;
+        margin: 24px 0 0 20px;
+      }
+
+      .signal-core div {
+        padding: 14px 15px;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.12);
+      }
+
+      .signal-core strong {
+        display: block;
+        color: var(--cyan);
+        font-size: 15px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .signal-core span {
+        display: block;
+        margin-top: 5px;
+        color: rgba(255, 255, 255, 0.86);
+        font-size: 18px;
+        line-height: 1.25;
+      }
+
+      .arrow {
+        display: none;
+      }
+
+      .governance {
+        display: grid;
+        grid-template-columns: 1.05fr 0.95fr;
+        gap: 24px;
+        margin: 44px 92px 0;
+      }
+
+      .governance-card {
+        min-height: 122px;
+        padding: 24px 28px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.96);
+        box-shadow: 0 12px 30px rgba(6, 27, 63, 0.08);
+      }
+
+      .governance-card strong {
+        display: block;
+        color: var(--navy);
+        font-size: 25px;
+      }
+
+      .governance-card p {
+        margin: 10px 0 0;
+        color: var(--muted);
+        font-size: 19px;
+      }
+
+      .footer {
+        position: absolute;
+        right: 92px;
+        bottom: 46px;
+        display: flex;
+        gap: 16px;
+        align-items: center;
+        color: #8b8f97;
+        font-size: 14px;
+      }
+
+      .footer b {
+        color: var(--navy);
+        font-size: 20px;
+      }
+
+      @media (max-width: 1200px) {
+        .slide {
+          width: 100%;
+          min-height: auto;
+          padding-bottom: 70px;
+        }
+
+        .topbar,
+        .kicker,
+        h1,
+        .lead,
+        .architecture,
+        .governance {
+          margin-left: 28px;
+          margin-right: 28px;
+        }
+
+        h1,
+        .lead {
+          width: auto;
+        }
+
+        .architecture,
+        .governance {
+          grid-template-columns: 1fr;
+        }
+
+        .arrow {
+          display: none;
+        }
+
+        .footer {
+          position: static;
+          justify-content: flex-end;
+          margin: 36px 28px 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <section class="slide" aria-label="Company X SIGNAL AGENT bagvedliggende flow">
+      <div class="topbar">
+        <div class="brand">
+          <img class="logo" src="../assets/companyx-logo.svg" alt="" aria-hidden="true" />
+          <div>
+            <strong>Company X SIGNAL AGENT</strong>
+            <span>Intern agentarkitektur</span>
+          </div>
+        </div>
+        <div class="classification">Dokumentklassifikation: KPMG fortroligt</div>
+      </div>
+
+      <div class="kicker">Bagvedliggende løsningsflow</div>
+      <h1>Voice, transskription og data samles før Mikkel får svaret</h1>
+      <p class="lead">
+        Telefonnummeret identificerer kunden. Den transskriberede samtale identificerer spørgsmålet. SIGNAL AGENT orkestrerer derefter opslag, forklaring og sagsnotat med human approval.
+      </p>
+
+      <div class="architecture">
+        <article class="lane">
+          <span class="eyebrow">01 Contact center</span>
+          <h2>Indgående opkald</h2>
+          <p>Eksisterende telefoni viser nummer, kø, ventetid og aktiv agent. Samtalen optages som i normal telco-drift.</p>
+          <div class="data-list">
+            <b>Telefonnummer</b>
+            <b>Call-ID</b>
+            <b>Agent-ID</b>
+          </div>
+        </article>
+
+        <article class="lane">
+          <span class="eyebrow">02 Voice layer</span>
+          <h2>Live transcript</h2>
+          <p>Voice agenten sender løbende transcript og nøgleord til SIGNAL AGENT, mens Mikkel stadig taler med kunden.</p>
+          <div class="data-list">
+            <b>“Regning højere”</b>
+            <b>Intent: faktura</b>
+            <b>Entity: maj-faktura</b>
+          </div>
+        </article>
+
+        <article class="lane dark">
+          <span class="eyebrow">03 SIGNAL AGENT</span>
+          <h2>Orkestrering</h2>
+          <p>SIGNAL AGENT kombinerer transcript, kunde-match og datakilder i én kontrolleret intern agent.</p>
+          <div class="signal-core">
+            <div>
+              <strong>Reasoning</strong>
+              <span>Find sandsynlig årsag til afvigelsen.</span>
+            </div>
+            <div>
+              <strong>Policy check</strong>
+              <span>Kontroller svar mod produktregler og samtykke.</span>
+            </div>
+            <div>
+              <strong>Audit</strong>
+              <span>Log kilder, tid og Mikkels endelige handling.</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="lane">
+          <span class="eyebrow">04 Datakilder</span>
+          <h2>Opslag på tværs</h2>
+          <p>Agenten henter kun de kilder, der er relevante for den identificerede journey.</p>
+          <div class="data-list">
+            <b>CRM og kundeprofil</b>
+            <b>Faktura og betaling</b>
+            <b>Forbrug og tilvalg</b>
+            <b>Produktregler og historik</b>
+          </div>
+        </article>
+
+        <article class="lane">
+          <span class="eyebrow">05 Agent workspace</span>
+          <h2>Mikkel godkender</h2>
+          <p>SIGNAL AGENT viser årsag, muligt svar, kilder og sagsnotat. Kunden kontaktes først, når Mikkel godkender.</p>
+          <div class="data-list">
+            <b>Forklaring</b>
+            <b>Svarforslag</b>
+            <b>Sagsnotat</b>
+          </div>
+        </article>
+
+        <span class="arrow a1" aria-hidden="true"></span>
+        <span class="arrow a2" aria-hidden="true"></span>
+        <span class="arrow a3" aria-hidden="true"></span>
+        <span class="arrow a4" aria-hidden="true"></span>
+      </div>
+
+      <div class="governance">
+        <div class="governance-card">
+          <strong>Realistisk integration</strong>
+          <p>
+            Løsningen forudsætter ikke en kundevendt chatbot. Den kobles på eksisterende contact center, call recording/transcription og interne system-API'er eller RPA-connectors.
+          </p>
+        </div>
+        <div class="governance-card">
+          <strong>Governance by design</strong>
+          <p>
+            SIGNAL AGENT sender ikke automatisk svar til kunden. Medarbejderen godkender, og alle kilder gemmes i audit-log og CRM.
+          </p>
+        </div>
+      </div>
+
+      <div class="footer">
+        <span>Company X transformation</span>
+        <span>|</span>
+        <b>Architecture</b>
+      </div>
+    </section>
+  </body>
+</html>

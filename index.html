@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Company X - Mobil, internet og streaming</title>
     <link rel="stylesheet" href="styles.css" />
-    <link rel="stylesheet" href="assistant-widget.css" />
   </head>
   <body>
     <header class="site-header">
@@ -207,7 +206,7 @@
               til en regning, kan du sende dem direkte til kundeservice.
             </p>
             <div class="bill-actions">
-              <a href="AI/">Åbn regningshjælp</a>
+              <a href="#fakturasporgsmaal">Send fakturaspørgsmål</a>
               <a href="#">Download fakturaforklaring</a>
               <a href="#">Find kundenummer</a>
               <a href="#">Se priser og gebyrer</a>
@@ -233,16 +232,12 @@
                 <strong>Send spørgsmål</strong>
                 <span>Opret en sag, hvis du stadig mangler en forklaring.</span>
               </a>
-              <a href="AI/">
-                <strong>Regningshjælp</strong>
-                <span>Få en forklaring med det samme og overdrag sagen ved behov.</span>
-              </a>
             </div>
           </div>
         </div>
       </section>
 
-      <section class="case-form-section">
+      <section class="case-form-section" id="fakturasporgsmaal">
         <div class="container case-form-grid">
           <div>
             <h2>Send fakturaspørgsmål</h2>
@@ -306,42 +301,5 @@
       </div>
     </footer>
 
-    <div class="cx-assistant" id="cxAssistant">
-      <button
-        class="cx-assistant-launcher"
-        id="cxAssistantLauncher"
-        type="button"
-        aria-expanded="false"
-        aria-controls="cxAssistantPanel"
-      >
-        <span class="launcher-mark" aria-hidden="true"><span></span></span>
-        <span>
-          <strong>Regningshjælp</strong>
-          <small>Få svar med det samme</small>
-        </span>
-      </button>
-
-      <section class="cx-assistant-panel" id="cxAssistantPanel" aria-label="Regningshjælp" hidden>
-        <header class="cx-assistant-header">
-          <div>
-            <span class="assistant-status-dot" aria-hidden="true"></span>
-            <strong>Company X regningshjælp</strong>
-            <small>Selvbetjening</small>
-          </div>
-          <button class="assistant-close" id="cxAssistantClose" type="button" aria-label="Luk regningshjælp">Luk</button>
-        </header>
-
-        <div class="cx-assistant-progress" aria-label="Forløb">
-          <span class="active" data-widget-progress="question">Spørgsmål</span>
-          <span data-widget-progress="identity">Konto</span>
-          <span data-widget-progress="lookup">Faktura</span>
-          <span data-widget-progress="answer">Svar</span>
-        </div>
-
-        <div class="cx-assistant-body" id="cxAssistantBody" aria-live="polite"></div>
-      </section>
-    </div>
-
-    <script src="assistant-widget.js"></script>
   </body>
 </html>

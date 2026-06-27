@@ -440,6 +440,7 @@ input {
 }
 
 .caller-card small,
+.caller-issue small,
 .customer-mini small {
   display: block;
   margin-top: 8px;
@@ -1001,6 +1002,10 @@ input {
   background: rgba(216, 245, 248, 0.85);
   font-weight: 900;
   text-decoration: none;
+}
+
+.dashboard-link.hidden {
+  display: none;
 }
 
 .case-note-body {
