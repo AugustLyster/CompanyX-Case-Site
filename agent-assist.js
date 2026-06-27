@@ -101,7 +101,7 @@ const noteText =
       <dd>Forklaring givet i samtale. Skriftlig oversigt kan sendes til maria.andersen@email.dk. Ingen åben dublet-sag og ingen kompensation foreslået.</dd>
     </div>
     <div>
-      <dt>Træningstags</dt>
+      <dt>Sagskoder</dt>
       <dd>billing_variance · add_on_data · promo_expiry · mail_consent_ok · resolved_first_contact · verified_by_agent</dd>
     </div>
   </dl>`;
@@ -229,5 +229,5 @@ finishCall.addEventListener("click", () => {
   dashboardLink.classList.remove("hidden");
   caseStatus.textContent = "Samtale afsluttet · CRM og dashboard opdateret";
   callState.textContent = "Samtale afsluttet";
-  callDuration.textContent = "03:05";
+  callDuration.textContent = "03:38";
 });
