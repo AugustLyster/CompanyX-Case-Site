@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Company X SIGNAL AGENT - Value curve</title>
+    <title>Company X SIGNAL AGENT - Value case</title>
     <style>
       :root {
         --navy: #061b3f;
@@ -11,9 +11,9 @@
         --cyan: #00baff;
         --cyan-soft: #d8f4ff;
         --ink: #071a3a;
-        --muted: #66748a;
-        --line: #d8e2ee;
-        --paper: #f4f8fc;
+        --muted: #657289;
+        --line: #d9e4ef;
+        --paper: #f3f8fc;
         --white: #ffffff;
         --shadow: 0 18px 42px rgba(6, 27, 63, 0.12);
       }
@@ -43,7 +43,9 @@
 
       .topbar,
       .brand,
-      .nav {
+      .nav,
+      .scenario-tabs,
+      .step-row {
         display: flex;
         align-items: center;
       }
@@ -56,6 +58,7 @@
 
       .brand {
         gap: 16px;
+        text-decoration: none;
       }
 
       .logo {
@@ -74,10 +77,11 @@
 
       .brand span,
       .eyebrow,
+      .kicker,
       .metric span,
-      .control label,
-      .legend,
-      .phase span {
+      .scenario-card span,
+      .step span,
+      .note strong {
         color: var(--muted);
         font-size: 12px;
         font-weight: 900;
@@ -104,7 +108,7 @@
 
       .hero {
         display: grid;
-        grid-template-columns: minmax(0, 1fr) 340px;
+        grid-template-columns: minmax(0, 1fr) 360px;
         gap: 20px;
         align-items: stretch;
         margin-top: 22px;
@@ -112,11 +116,11 @@
 
       .hero-main {
         min-height: 255px;
-        padding: 36px 42px;
+        padding: 38px 44px;
         border-radius: 16px;
         color: var(--white);
         background:
-          linear-gradient(100deg, rgba(6, 27, 63, 0.98), rgba(9, 42, 92, 0.92) 58%, rgba(0, 186, 255, 0.28)),
+          linear-gradient(100deg, rgba(6, 27, 63, 0.99), rgba(9, 42, 92, 0.94) 60%, rgba(0, 186, 255, 0.3)),
           var(--navy);
         box-shadow: var(--shadow);
       }
@@ -126,41 +130,41 @@
       }
 
       h1 {
-        max-width: 850px;
+        max-width: 950px;
         margin: 16px 0 0;
         font-family: "Arial Narrow", Arial, sans-serif;
-        font-size: clamp(3.4rem, 5vw, 5.6rem);
+        font-size: clamp(3.4rem, 5vw, 5.4rem);
         line-height: 0.92;
         letter-spacing: 0;
       }
 
       .hero-main p {
-        max-width: 860px;
+        max-width: 870px;
         margin: 24px 0 0;
-        color: rgba(255, 255, 255, 0.82);
+        color: rgba(255, 255, 255, 0.84);
         font-size: 21px;
         line-height: 1.4;
       }
 
-      .assumption {
+      .scenario-card {
         display: grid;
         align-content: center;
         gap: 18px;
-        padding: 30px;
+        padding: 28px;
         border: 1px solid var(--line);
         border-radius: 16px;
-        background: rgba(255, 255, 255, 0.94);
+        background: rgba(255, 255, 255, 0.95);
         box-shadow: var(--shadow);
       }
 
-      .assumption strong {
+      .scenario-card strong {
         display: block;
         color: var(--navy);
         font-size: 42px;
         line-height: 0.95;
       }
 
-      .assumption p {
+      .scenario-card p {
         margin: 0;
         color: var(--muted);
         font-size: 17px;
@@ -181,7 +185,7 @@
         box-shadow: var(--shadow);
       }
 
-      .chart-panel {
+      .value-panel {
         padding: 30px 34px 28px;
       }
 
@@ -190,154 +194,140 @@
         align-items: flex-end;
         justify-content: space-between;
         gap: 20px;
-        margin-bottom: 18px;
+        margin-bottom: 22px;
       }
 
       h2 {
+        max-width: 750px;
         margin: 8px 0 0;
         color: var(--navy);
         font-family: "Arial Narrow", Arial, sans-serif;
-        font-size: 46px;
+        font-size: 48px;
         line-height: 0.98;
       }
 
-      .legend {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 14px;
+      .scenario-tabs {
+        gap: 8px;
         justify-content: flex-end;
       }
 
-      .legend i {
-        display: inline-block;
-        width: 28px;
-        height: 4px;
-        margin-right: 8px;
-        vertical-align: middle;
-        border-radius: 999px;
-        background: var(--navy);
-      }
-
-      .legend .scaled i {
-        background: var(--cyan);
-      }
-
-      .chart-wrap {
-        position: relative;
-        min-height: 370px;
-        overflow: hidden;
-        border: 1px solid #e0e8f1;
-        border-radius: 14px;
-        background:
-          linear-gradient(90deg, rgba(216, 244, 255, 0.38), transparent 32%),
-          #ffffff;
-      }
-
-      svg {
-        display: block;
-        width: 100%;
-        height: 370px;
-      }
-
-      .callout {
-        position: absolute;
-        right: 24px;
-        top: 24px;
-        width: 230px;
-        padding: 18px 20px;
-        border: 1px solid rgba(0, 186, 255, 0.34);
-        border-radius: 14px;
-        background: rgba(255, 255, 255, 0.92);
-        box-shadow: 0 10px 24px rgba(6, 27, 63, 0.08);
-      }
-
-      .callout span {
-        color: var(--muted);
-        font-size: 12px;
-        font-weight: 900;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-      }
-
-      .callout strong {
-        display: block;
-        margin-top: 8px;
+      .scenario-tabs button {
+        min-height: 42px;
+        padding: 0 15px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
         color: var(--navy);
-        font-size: 32px;
-        line-height: 1;
+        background: var(--white);
+        cursor: pointer;
+        font: 900 13px/1 Arial, Helvetica, sans-serif;
+      }
+
+      .scenario-tabs button[aria-pressed="true"] {
+        border-color: var(--cyan);
+        background: var(--cyan-soft);
+        box-shadow: 0 8px 18px rgba(0, 186, 255, 0.14);
       }
 
       .metrics {
         display: grid;
         grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: 12px;
-        margin-top: 16px;
+        gap: 14px;
       }
 
       .metric {
-        min-height: 118px;
-        padding: 18px;
+        min-height: 145px;
+        padding: 22px;
         border: 1px solid var(--line);
         border-radius: 14px;
         background: #ffffff;
       }
 
+      .metric.primary {
+        color: var(--white);
+        border-color: transparent;
+        background: var(--navy);
+      }
+
+      .metric.accent {
+        border-color: transparent;
+        background: var(--cyan);
+      }
+
+      .metric.primary span,
+      .metric.accent span {
+        color: rgba(255, 255, 255, 0.74);
+      }
+
+      .metric.accent span {
+        color: rgba(6, 27, 63, 0.68);
+      }
+
       .metric strong {
         display: block;
-        margin-top: 10px;
+        margin-top: 14px;
         color: var(--navy);
-        font-size: 28px;
-        line-height: 1;
+        font-size: 34px;
+        line-height: 0.96;
       }
 
-      .controls {
-        padding: 24px;
+      .metric.primary strong,
+      .metric.primary p {
+        color: var(--white);
       }
 
-      .control {
-        padding: 18px 0;
-        border-bottom: 1px solid var(--line);
+      .metric.accent strong,
+      .metric.accent p {
+        color: var(--navy);
       }
 
-      .control:first-child {
-        padding-top: 0;
+      .metric p {
+        margin: 10px 0 0;
+        color: var(--muted);
+        font-size: 15px;
+        line-height: 1.28;
       }
 
-      .control:last-child {
-        border-bottom: 0;
-        padding-bottom: 0;
-      }
-
-      .baseline-lock {
-        margin-top: 12px;
-        padding: 20px;
-        border: 1px solid rgba(0, 186, 255, 0.28);
+      .storyline {
+        position: relative;
+        min-height: 340px;
+        margin-top: 18px;
+        overflow: hidden;
+        border: 1px solid #e0e8f1;
         border-radius: 14px;
-        background: linear-gradient(90deg, rgba(216, 244, 255, 0.78), rgba(255, 255, 255, 0.9));
+        background:
+          linear-gradient(90deg, rgba(216, 244, 255, 0.52), transparent 38%),
+          #ffffff;
       }
 
-      .baseline-lock h3 {
-        margin: 0;
-        color: var(--navy);
-        font-size: 18px;
-        line-height: 1;
+      .curve-label {
+        position: absolute;
+        left: 28px;
+        top: 24px;
+        color: var(--muted);
+        font-weight: 900;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
       }
 
-      .baseline-lock dl {
-        display: grid;
-        gap: 12px;
-        margin: 18px 0 0;
+      svg {
+        display: block;
+        width: 100%;
+        height: 340px;
       }
 
-      .baseline-lock div {
-        display: flex;
-        justify-content: space-between;
-        gap: 14px;
-        padding-top: 12px;
-        border-top: 1px solid rgba(6, 27, 63, 0.11);
+      .payback-card {
+        position: absolute;
+        right: 26px;
+        top: 28px;
+        width: 245px;
+        padding: 20px 22px;
+        border: 1px solid rgba(0, 186, 255, 0.38);
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.94);
+        box-shadow: 0 10px 24px rgba(6, 27, 63, 0.08);
       }
 
-      .baseline-lock dt {
+      .payback-card span {
         color: var(--muted);
         font-size: 12px;
         font-weight: 900;
@@ -345,54 +335,77 @@
         text-transform: uppercase;
       }
 
-      .baseline-lock dd {
-        margin: 0;
+      .payback-card strong {
+        display: block;
+        margin-top: 8px;
         color: var(--navy);
-        font-size: 18px;
-        font-weight: 900;
-        text-align: right;
+        font-size: 34px;
+        line-height: 1;
       }
 
-      .control-row {
-        display: flex;
-        align-items: baseline;
-        justify-content: space-between;
-        gap: 14px;
-        margin-bottom: 12px;
-      }
-
-      .control output {
-        color: var(--navy);
-        font-size: 22px;
-        font-weight: 900;
-      }
-
-      input[type="range"] {
-        width: 100%;
-        accent-color: var(--cyan);
-      }
-
-      .timeline {
-        display: grid;
-        grid-template-columns: repeat(5, minmax(0, 1fr));
+      .step-row {
+        align-items: stretch;
         gap: 12px;
         margin-top: 18px;
       }
 
-      .phase {
-        min-height: 92px;
-        padding: 15px 16px;
+      .step {
+        flex: 1;
+        min-height: 108px;
+        padding: 17px 18px;
         border: 1px solid var(--line);
         border-radius: 14px;
         background: #ffffff;
       }
 
-      .phase strong {
+      .step strong {
         display: block;
         margin-top: 9px;
         color: var(--navy);
-        font-size: 17px;
+        font-size: 18px;
         line-height: 1.18;
+      }
+
+      .side {
+        padding: 24px;
+      }
+
+      .side h3 {
+        margin: 0;
+        color: var(--navy);
+        font-size: 23px;
+      }
+
+      .note {
+        margin-top: 18px;
+        padding: 18px;
+        border: 1px solid rgba(0, 186, 255, 0.28);
+        border-radius: 14px;
+        background: linear-gradient(90deg, rgba(216, 244, 255, 0.76), rgba(255, 255, 255, 0.9));
+      }
+
+      .note strong {
+        display: block;
+        margin-bottom: 10px;
+        color: var(--navy);
+      }
+
+      .note p,
+      .side li {
+        color: var(--muted);
+        font-size: 16px;
+        line-height: 1.36;
+      }
+
+      .note p {
+        margin: 0;
+      }
+
+      .side ul {
+        display: grid;
+        gap: 12px;
+        margin: 18px 0 0;
+        padding: 0 0 0 18px;
       }
 
       footer {
@@ -413,7 +426,8 @@
         }
 
         .metrics,
-        .timeline {
+        .step-row {
+          display: grid;
           grid-template-columns: repeat(2, minmax(0, 1fr));
         }
       }
@@ -432,20 +446,25 @@
           display: grid;
         }
 
-        .hero-main {
-          padding: 30px 24px;
+        .hero-main,
+        .value-panel {
+          padding: 28px 22px;
         }
 
         h1 {
-          font-size: 3.3rem;
+          font-size: 3.15rem;
+        }
+
+        h2 {
+          font-size: 3rem;
         }
 
         .metrics,
-        .timeline {
+        .step-row {
           grid-template-columns: 1fr;
         }
 
-        .callout {
+        .payback-card {
           position: static;
           width: auto;
           margin: 12px;
@@ -460,7 +479,7 @@
           <img class="logo" src="../assets/companyx-logo.svg" alt="" aria-hidden="true" />
           <div>
             <strong>Company X</strong>
-            <span>SIGNAL AGENT business case</span>
+            <span>SIGNAL AGENT value case</span>
           </div>
         </a>
         <nav class="nav" aria-label="Demo navigation">
@@ -472,115 +491,93 @@
 
       <section class="hero">
         <div class="hero-main">
-          <span class="eyebrow">Interaktiv value curve</span>
-          <h1>Hvornår betaler første SIGNAL AGENT-flow sig hjem?</h1>
+          <span class="eyebrow">Interaktiv value case</span>
+          <h1>Invester i første flow. Skalér når effekten er bevist.</h1>
           <p>
-            Modellen holder Company X baseline fast og lader kun ledelsen teste tre beslutninger:
-            investering, tidsbesparelse og hvor mange servicejourneys motoren genbruges på.
+            Modellen viser den kommercielle logik bag SIGNAL AGENT: første fakturaflow betaler
+            investeringen hjem, hvorefter samme agentmønster genbruges på flere servicejourneys.
           </p>
         </div>
-        <aside class="assumption">
+        <aside class="scenario-card">
           <div>
-            <span class="eyebrow">Default case</span>
-            <strong id="heroPayback">Måned 13</strong>
+            <span>Valgt scenarie</span>
+            <strong id="scenarioName">Base</strong>
           </div>
-          <p>
-            Default-scenariet bruger DKK 280/time som forsigtig fuldt lastet intern kundeservicekost.
+          <p id="scenarioText">
+            Bruges som hovedcase: realistisk implementeringsinterval, målbar tidsbesparelse og moderat skalering.
           </p>
         </aside>
       </section>
 
-      <section class="workspace" aria-label="Value curve model">
-        <div class="panel chart-panel">
+      <section class="workspace" aria-label="Value case model">
+        <div class="panel value-panel">
           <div class="panel-head">
             <div>
-              <span class="eyebrow">Kumulativ net value</span>
-              <h2>Investering først, skalering efter proof</h2>
+              <span class="kicker">Kumulativ værdiskabelse</span>
+              <h2>Fire tal er nok til at forklare casen</h2>
             </div>
-            <div class="legend" aria-label="Forklaring">
-              <span><i></i>Faktura-flow</span>
-              <span class="scaled"><i></i>Skaleret program</span>
-            </div>
-          </div>
-
-          <div class="chart-wrap">
-            <svg id="curve" viewBox="0 0 920 370" role="img" aria-label="Kumulativ value curve"></svg>
-            <div class="callout">
-              <span>Payback</span>
-              <strong id="paybackLabel">Måned 13</strong>
+            <div class="scenario-tabs" aria-label="Vælg scenarie">
+              <button type="button" data-scenario="low">Forsigtig</button>
+              <button type="button" data-scenario="base" aria-pressed="true">Base</button>
+              <button type="button" data-scenario="high">Ambitiøs</button>
             </div>
           </div>
 
           <div class="metrics" aria-label="Nøgletal">
-            <div class="metric">
+            <div class="metric primary">
               <span>Investering</span>
-              <strong id="mInvestment">DKK 5,0m</strong>
+              <strong id="investment">DKK 3-6m</strong>
+              <p>Første bølge: baseline, build, integration og change.</p>
             </div>
             <div class="metric">
-              <span>Faktura årligt</span>
-              <strong id="mAnnual">DKK 10,0m</strong>
+              <span>Første flow</span>
+              <strong id="firstFlow">DKK 10-15m</strong>
+              <p>Årlig bruttoværdi i fakturaflowet.</p>
+            </div>
+            <div class="metric accent">
+              <span>Payback</span>
+              <strong id="payback">Måned 11-14</strong>
+              <p>Når kumulativ tidsbesparelse overstiger første investering.</p>
             </div>
             <div class="metric">
-              <span>Frigjorte timer</span>
-              <strong id="mHours">31k</strong>
-            </div>
-            <div class="metric">
-              <span>24 mdr. net</span>
-              <strong id="mNet24">DKK 17,3m</strong>
+              <span>Skaleret potentiale</span>
+              <strong id="scaled">DKK 30-45m</strong>
+              <p>Årlig værdipotentiale ved 3-4 servicejourneys.</p>
             </div>
           </div>
 
-          <div class="timeline" aria-label="Implementeringstidslinje">
-            <div class="phase"><span>0-2 mdr.</span><strong>Baseline, datakilder og målepunkt</strong></div>
-            <div class="phase"><span>3-5 mdr.</span><strong>Build, integration og pilot</strong></div>
-            <div class="phase"><span>6 mdr.</span><strong>Første dokumenterede effekt</strong></div>
-            <div class="phase"><span>11-14 mdr.</span><strong>Fakturaflow betaler sig hjem</strong></div>
-            <div class="phase"><span>12+ mdr.</span><strong>Genbrug på nye servicejourneys</strong></div>
+          <div class="storyline" aria-label="Forenklet value curve">
+            <div class="curve-label">Fra pilot til program</div>
+            <svg id="curve" viewBox="0 0 920 340" role="img" aria-label="Forenklet investeringskurve"></svg>
+            <div class="payback-card">
+              <span>Faktura-flow betaler sig hjem</span>
+              <strong id="paybackCard">Måned 12</strong>
+            </div>
+          </div>
+
+          <div class="step-row" aria-label="Programtrin">
+            <div class="step"><span>0-2 mdr.</span><strong>Baseline og datakilder låses</strong></div>
+            <div class="step"><span>3-6 mdr.</span><strong>Build, integration og pilot</strong></div>
+            <div class="step"><span>6 mdr.</span><strong>Første dokumenterede effekt</strong></div>
+            <div class="step"><span>11-14 mdr.</span><strong>Fakturaflow betaler sig hjem</strong></div>
+            <div class="step"><span>12+ mdr.</span><strong>Genbrug på nye servicejourneys</strong></div>
           </div>
         </div>
 
-        <aside class="panel controls" aria-label="Antagelser">
-          <div class="control">
-            <div class="control-row">
-              <label for="investment">Implementering</label>
-              <output data-out="investment">DKK 5,0m</output>
-            </div>
-            <input id="investment" data-key="investment" type="range" min="3" max="6" step="0.1" value="5" />
+        <aside class="panel side" aria-label="Antagelser">
+          <h3>Hvad modellen bygger på</h3>
+          <div class="note">
+            <strong>Company X baseline</strong>
+            <p>
+              640k årlige fakturarelaterede sager, ca. 3:30 min. sparet pr. sag og DKK 425-550
+              pr. fuldt lastet behandlingstime.
+            </p>
           </div>
-
-          <div class="control">
-            <div class="control-row">
-              <label for="minutes">Minutter sparet pr. sag</label>
-              <output data-out="minutes">3,5 min</output>
-            </div>
-            <input id="minutes" data-key="minutes" type="range" min="2.5" max="4.5" step="0.1" value="3.5" />
-          </div>
-
-          <div class="control">
-            <div class="control-row">
-              <label for="journeys">Servicejourneys i program</label>
-              <output data-out="journeys">3</output>
-            </div>
-            <input id="journeys" data-key="journeys" type="range" min="1" max="4" step="1" value="3" />
-          </div>
-
-          <div class="baseline-lock" aria-label="Låste baselineantagelser">
-            <h3>Låst Company X baseline</h3>
-            <dl>
-              <div>
-                <dt>Fakturasager</dt>
-                <dd>640k/år</dd>
-              </div>
-              <div>
-                <dt>Adoption</dt>
-                <dd>85%</dd>
-              </div>
-              <div>
-                <dt>Intern timepris</dt>
-                <dd>DKK 280</dd>
-              </div>
-            </dl>
-          </div>
+          <ul>
+            <li>Investeringen vises som interval, fordi integrationer og governance afgør endeligt scope.</li>
+            <li>Værdien er bruttoværdi og kapacitetsfrigørelse, ikke ren cash saving fra dag ét.</li>
+            <li>Skalering kræver først dokumenteret effekt i fakturaflowet.</li>
+          </ul>
         </aside>
       </section>
 
@@ -591,134 +588,123 @@
     </main>
 
     <script>
-      const svg = document.getElementById("curve");
+      const scenarios = {
+        low: {
+          name: "Forsigtig",
+          text: "Lavere realisering og mere forsigtig skalering. Bruges hvis ledelsen vil se bunden af casen.",
+          investment: "DKK 3-5m",
+          firstFlow: "DKK 8-12m",
+          payback: "Måned 13-16",
+          paybackPoint: "Måned 14",
+          scaled: "DKK 24-32m",
+          points: [
+            [70, 218],
+            [220, 248],
+            [360, 230],
+            [500, 186],
+            [640, 142],
+            [815, 92],
+          ],
+        },
+        base: {
+          name: "Base",
+          text: "Bruges som hovedcase: realistisk implementeringsinterval, målbar tidsbesparelse og moderat skalering.",
+          investment: "DKK 3-6m",
+          firstFlow: "DKK 10-15m",
+          payback: "Måned 11-14",
+          paybackPoint: "Måned 12",
+          scaled: "DKK 30-45m",
+          points: [
+            [70, 215],
+            [220, 242],
+            [360, 218],
+            [500, 168],
+            [640, 115],
+            [815, 66],
+          ],
+        },
+        high: {
+          name: "Ambitiøs",
+          text: "Højere adoption og hurtigere genbrug på flere journeys. Bruges som upside, ikke som base promise.",
+          investment: "DKK 4-6m",
+          firstFlow: "DKK 13-18m",
+          payback: "Måned 9-12",
+          paybackPoint: "Måned 10",
+          scaled: "DKK 40-55m",
+          points: [
+            [70, 212],
+            [220, 235],
+            [360, 198],
+            [500, 136],
+            [640, 82],
+            [815, 44],
+          ],
+        },
+      };
+
       const els = {
-        heroPayback: document.getElementById("heroPayback"),
-        paybackLabel: document.getElementById("paybackLabel"),
-        mInvestment: document.getElementById("mInvestment"),
-        mAnnual: document.getElementById("mAnnual"),
-        mHours: document.getElementById("mHours"),
-        mNet24: document.getElementById("mNet24"),
+        scenarioName: document.getElementById("scenarioName"),
+        scenarioText: document.getElementById("scenarioText"),
+        investment: document.getElementById("investment"),
+        firstFlow: document.getElementById("firstFlow"),
+        payback: document.getElementById("payback"),
+        paybackCard: document.getElementById("paybackCard"),
+        scaled: document.getElementById("scaled"),
+        curve: document.getElementById("curve"),
       };
 
-      const state = {
-        investment: 5,
-        cases: 640000,
-        minutes: 3.5,
-        hourCost: 280,
-        adoption: 85,
-        journeys: 3,
-      };
-
-      function dkk(value) {
-        return `DKK ${value.toLocaleString("da-DK", { maximumFractionDigits: 1 })}m`;
+      function curvePath(points) {
+        return points
+          .map(([x, y], index) => `${index === 0 ? "M" : "L"} ${x} ${y}`)
+          .join(" ");
       }
 
-      function compact(value) {
-        return `${Math.round(value / 1000).toLocaleString("da-DK")}k`;
+      function drawCurve(scenario) {
+        const [start, dip, proof, payback, scale, end] = scenario.points;
+        els.curve.innerHTML = `
+          <defs>
+            <linearGradient id="fill" x1="0%" x2="100%" y1="0%" y2="0%">
+              <stop offset="0%" stop-color="#d8f4ff" stop-opacity="0.75" />
+              <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+            </linearGradient>
+          </defs>
+          <path d="M 60 282 L 850 282" stroke="#e4ecf5" stroke-width="1" />
+          <path d="M ${curvePath(scenario.points)}" fill="none" stroke="#00baff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M ${curvePath([start, dip, proof, payback])}" fill="none" stroke="#061b3f" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" opacity="0.95" />
+          <circle cx="${start[0]}" cy="${start[1]}" r="9" fill="#061b3f" stroke="#ffffff" stroke-width="4" />
+          <circle cx="${proof[0]}" cy="${proof[1]}" r="9" fill="#061b3f" stroke="#ffffff" stroke-width="4" />
+          <circle cx="${payback[0]}" cy="${payback[1]}" r="10" fill="#00baff" stroke="#ffffff" stroke-width="4" />
+          <circle cx="${end[0]}" cy="${end[1]}" r="9" fill="#00baff" stroke="#ffffff" stroke-width="4" />
+          <text x="${start[0] - 26}" y="304" fill="#657289" font-size="14" font-weight="700" font-family="Arial">Start</text>
+          <text x="${proof[0] - 34}" y="304" fill="#657289" font-size="14" font-weight="700" font-family="Arial">Proof</text>
+          <text x="${payback[0] - 34}" y="304" fill="#061b3f" font-size="14" font-weight="900" font-family="Arial">Payback</text>
+          <text x="${end[0] - 44}" y="304" fill="#657289" font-size="14" font-weight="700" font-family="Arial">Skalering</text>
+          <text x="${dip[0] - 76}" y="${dip[1] - 18}" fill="#657289" font-size="13" font-family="Arial">Investering først</text>
+          <text x="${scale[0] - 56}" y="${scale[1] - 20}" fill="#00a7e5" font-size="13" font-weight="900" font-family="Arial">Genbrug af agentmønster</text>
+        `;
       }
 
-      function clamp(value, min, max) {
-        return Math.max(min, Math.min(max, value));
-      }
+      function applyScenario(key) {
+        const scenario = scenarios[key];
+        els.scenarioName.textContent = scenario.name;
+        els.scenarioText.textContent = scenario.text;
+        els.investment.textContent = scenario.investment;
+        els.firstFlow.textContent = scenario.firstFlow;
+        els.payback.textContent = scenario.payback;
+        els.paybackCard.textContent = scenario.paybackPoint;
+        els.scaled.textContent = scenario.scaled;
+        drawCurve(scenario);
 
-      function calculate() {
-        const hours = (state.cases * state.minutes * (state.adoption / 100)) / 60;
-        const annual = (hours * state.hourCost * 1.12) / 1000000;
-        const extraJourneys = Math.max(0, state.journeys - 1);
-        const extraInvestment = extraJourneys * 1.0;
-        const extraAnnual = annual * extraJourneys * 0.62;
-        const first = [];
-        const scaled = [];
-        let cumFirst = 0;
-        let cumScaled = 0;
-
-        for (let month = 0; month <= 24; month += 1) {
-          const firstSpend = month <= 5 ? state.investment / 6 : 0;
-          const firstRamp = clamp((month - 5) / 4, 0, 1);
-          const firstGain = (annual / 12) * firstRamp;
-          cumFirst += firstGain - firstSpend;
-
-          const scaleSpend = month >= 10 && month <= 15 ? extraInvestment / 6 : 0;
-          const scaleRamp = clamp((month - 12) / 6, 0, 1);
-          const scaleGain = (extraAnnual / 12) * scaleRamp;
-          cumScaled += firstGain + scaleGain - firstSpend - scaleSpend;
-
-          first.push({ month, value: cumFirst });
-          scaled.push({ month, value: cumScaled });
-        }
-
-        const payback = first.find((point) => point.value >= 0)?.month ?? 24;
-        return {
-          annual,
-          hours,
-          first,
-          scaled,
-          payback,
-          net24: scaled[scaled.length - 1].value,
-        };
-      }
-
-      function pathFrom(points, x, y) {
-        return points.map((point, index) => `${index === 0 ? "M" : "L"} ${x(point.month)} ${y(point.value)}`).join(" ");
-      }
-
-      function draw() {
-        const model = calculate();
-        const values = [...model.first, ...model.scaled].map((p) => p.value);
-        const minValue = Math.min(-state.investment - 1.5, ...values);
-        const maxValue = Math.max(18, ...values) + 3;
-        const chart = { left: 70, top: 26, width: 790, height: 286 };
-        const x = (month) => chart.left + (month / 24) * chart.width;
-        const y = (value) => chart.top + ((maxValue - value) / (maxValue - minValue)) * chart.height;
-        const zeroY = y(0);
-        const paybackX = x(model.payback);
-
-        let html = "";
-        for (let i = 0; i <= 4; i += 1) {
-          const value = minValue + ((maxValue - minValue) / 4) * i;
-          const gy = y(value);
-          html += `<line x1="${chart.left}" y1="${gy}" x2="${chart.left + chart.width}" y2="${gy}" stroke="#e4ebf3" stroke-width="1" />`;
-          html += `<text x="18" y="${gy + 5}" fill="#66748a" font-size="13" font-family="Arial">${Math.round(value)}m</text>`;
-        }
-        for (let month = 0; month <= 24; month += 6) {
-          const gx = x(month);
-          html += `<line x1="${gx}" y1="${chart.top}" x2="${gx}" y2="${chart.top + chart.height}" stroke="#edf2f7" stroke-width="1" />`;
-          html += `<text x="${gx - 18}" y="346" fill="#66748a" font-size="13" font-family="Arial">${month} mdr.</text>`;
-        }
-        html += `<line x1="${chart.left}" y1="${zeroY}" x2="${chart.left + chart.width}" y2="${zeroY}" stroke="#061b3f" stroke-width="1.5" opacity="0.55" />`;
-        html += `<path d="${pathFrom(model.first, x, y)}" fill="none" stroke="#061b3f" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />`;
-        html += `<path d="${pathFrom(model.scaled, x, y)}" fill="none" stroke="#00baff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />`;
-        html += `<line x1="${paybackX}" y1="${chart.top}" x2="${paybackX}" y2="${chart.top + chart.height}" stroke="#00baff" stroke-width="2" stroke-dasharray="7 8" />`;
-        html += `<circle cx="${paybackX}" cy="${y(model.first[model.payback].value)}" r="7" fill="#00baff" stroke="#ffffff" stroke-width="3" />`;
-        html += `<text x="${paybackX + 12}" y="${y(model.first[model.payback].value) - 10}" fill="#061b3f" font-size="15" font-weight="700" font-family="Arial">payback</text>`;
-        html += `<text x="70" y="24" fill="#66748a" font-size="13" font-family="Arial">DKK mio.</text>`;
-        svg.innerHTML = html;
-
-        els.heroPayback.textContent = `Måned ${model.payback}`;
-        els.paybackLabel.textContent = `Måned ${model.payback}`;
-        els.mInvestment.textContent = dkk(state.investment);
-        els.mAnnual.textContent = dkk(model.annual);
-        els.mHours.textContent = compact(model.hours);
-        els.mNet24.textContent = dkk(model.net24);
-      }
-
-      function updateOutputs() {
-        document.querySelector('[data-out="investment"]').textContent = dkk(state.investment);
-        document.querySelector('[data-out="minutes"]').textContent = `${state.minutes.toLocaleString("da-DK")} min`;
-        document.querySelector('[data-out="journeys"]').textContent = String(state.journeys);
-      }
-
-      document.querySelectorAll("[data-key]").forEach((input) => {
-        input.addEventListener("input", () => {
-          state[input.dataset.key] = Number(input.value);
-          updateOutputs();
-          draw();
+        document.querySelectorAll("[data-scenario]").forEach((button) => {
+          button.setAttribute("aria-pressed", String(button.dataset.scenario === key));
         });
+      }
+
+      document.querySelectorAll("[data-scenario]").forEach((button) => {
+        button.addEventListener("click", () => applyScenario(button.dataset.scenario));
       });
 
-      updateOutputs();
-      draw();
+      applyScenario("base");
     </script>
   </body>
 </html>
