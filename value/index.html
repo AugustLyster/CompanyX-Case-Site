@@ -269,7 +269,7 @@
 
       .metrics {
         display: grid;
-        grid-template-columns: repeat(5, minmax(0, 1fr));
+        grid-template-columns: repeat(4, minmax(0, 1fr));
         gap: 12px;
         margin-top: 16px;
       }
@@ -306,6 +306,51 @@
       .control:last-child {
         border-bottom: 0;
         padding-bottom: 0;
+      }
+
+      .baseline-lock {
+        margin-top: 12px;
+        padding: 20px;
+        border: 1px solid rgba(0, 186, 255, 0.28);
+        border-radius: 14px;
+        background: linear-gradient(90deg, rgba(216, 244, 255, 0.78), rgba(255, 255, 255, 0.9));
+      }
+
+      .baseline-lock h3 {
+        margin: 0;
+        color: var(--navy);
+        font-size: 18px;
+        line-height: 1;
+      }
+
+      .baseline-lock dl {
+        display: grid;
+        gap: 12px;
+        margin: 18px 0 0;
+      }
+
+      .baseline-lock div {
+        display: flex;
+        justify-content: space-between;
+        gap: 14px;
+        padding-top: 12px;
+        border-top: 1px solid rgba(6, 27, 63, 0.11);
+      }
+
+      .baseline-lock dt {
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .baseline-lock dd {
+        margin: 0;
+        color: var(--navy);
+        font-size: 18px;
+        font-weight: 900;
+        text-align: right;
       }
 
       .control-row {
@@ -430,17 +475,17 @@
           <span class="eyebrow">Interaktiv value curve</span>
           <h1>Hvornår betaler første SIGNAL AGENT-flow sig hjem?</h1>
           <p>
-            Modellen viser investering, kumulativ gevinst og skalering fra fakturaflowet til flere servicejourneys.
-            Den er sat op som et ledelsesværktøj, ikke som en perfekt forecast-model.
+            Modellen holder Company X baseline fast og lader kun ledelsen teste tre beslutninger:
+            investering, tidsbesparelse og hvor mange servicejourneys motoren genbruges på.
           </p>
         </div>
         <aside class="assumption">
           <div>
             <span class="eyebrow">Default case</span>
-            <strong id="heroPayback">Måned 10</strong>
+            <strong id="heroPayback">Måned 13</strong>
           </div>
           <p>
-            Break-even opstår, når dokumenteret tidsbesparelse i fakturaflowet overstiger den første implementeringsinvestering.
+            Default-scenariet bruger DKK 280/time som forsigtig fuldt lastet intern kundeservicekost.
           </p>
         </aside>
       </section>
@@ -462,18 +507,18 @@
             <svg id="curve" viewBox="0 0 920 370" role="img" aria-label="Kumulativ value curve"></svg>
             <div class="callout">
               <span>Payback</span>
-              <strong id="paybackLabel">Måned 10</strong>
+              <strong id="paybackLabel">Måned 13</strong>
             </div>
           </div>
 
           <div class="metrics" aria-label="Nøgletal">
             <div class="metric">
               <span>Investering</span>
-              <strong id="mInvestment">DKK 4,8m</strong>
+              <strong id="mInvestment">DKK 5,0m</strong>
             </div>
             <div class="metric">
               <span>Faktura årligt</span>
-              <strong id="mAnnual">DKK 17,8m</strong>
+              <strong id="mAnnual">DKK 10,0m</strong>
             </div>
             <div class="metric">
               <span>Frigjorte timer</span>
@@ -481,11 +526,7 @@
             </div>
             <div class="metric">
               <span>24 mdr. net</span>
-              <strong id="mNet24">DKK 36m</strong>
-            </div>
-            <div class="metric">
-              <span>Skalerede flows</span>
-              <strong id="mJourneys">3</strong>
+              <strong id="mNet24">DKK 17,3m</strong>
             </div>
           </div>
 
@@ -493,7 +534,7 @@
             <div class="phase"><span>0-2 mdr.</span><strong>Baseline, datakilder og målepunkt</strong></div>
             <div class="phase"><span>3-5 mdr.</span><strong>Build, integration og pilot</strong></div>
             <div class="phase"><span>6 mdr.</span><strong>Første dokumenterede effekt</strong></div>
-            <div class="phase"><span>8-10 mdr.</span><strong>Fakturaflow betaler sig hjem</strong></div>
+            <div class="phase"><span>11-14 mdr.</span><strong>Fakturaflow betaler sig hjem</strong></div>
             <div class="phase"><span>12+ mdr.</span><strong>Genbrug på nye servicejourneys</strong></div>
           </div>
         </div>
@@ -502,17 +543,9 @@
           <div class="control">
             <div class="control-row">
               <label for="investment">Implementering</label>
-              <output data-out="investment">DKK 4,8m</output>
+              <output data-out="investment">DKK 5,0m</output>
             </div>
-            <input id="investment" data-key="investment" type="range" min="3" max="8" step="0.1" value="4.8" />
-          </div>
-
-          <div class="control">
-            <div class="control-row">
-              <label for="cases">Fakturasager pr. år</label>
-              <output data-out="cases">640k</output>
-            </div>
-            <input id="cases" data-key="cases" type="range" min="500000" max="750000" step="10000" value="640000" />
+            <input id="investment" data-key="investment" type="range" min="3" max="6" step="0.1" value="5" />
           </div>
 
           <div class="control">
@@ -520,23 +553,7 @@
               <label for="minutes">Minutter sparet pr. sag</label>
               <output data-out="minutes">3,5 min</output>
             </div>
-            <input id="minutes" data-key="minutes" type="range" min="2" max="5" step="0.1" value="3.5" />
-          </div>
-
-          <div class="control">
-            <div class="control-row">
-              <label for="hourCost">Fuldt lastet timepris</label>
-              <output data-out="hourCost">DKK 500</output>
-            </div>
-            <input id="hourCost" data-key="hourCost" type="range" min="400" max="600" step="10" value="500" />
-          </div>
-
-          <div class="control">
-            <div class="control-row">
-              <label for="adoption">Adoption i flowet</label>
-              <output data-out="adoption">85%</output>
-            </div>
-            <input id="adoption" data-key="adoption" type="range" min="60" max="95" step="5" value="85" />
+            <input id="minutes" data-key="minutes" type="range" min="2.5" max="4.5" step="0.1" value="3.5" />
           </div>
 
           <div class="control">
@@ -545,6 +562,24 @@
               <output data-out="journeys">3</output>
             </div>
             <input id="journeys" data-key="journeys" type="range" min="1" max="4" step="1" value="3" />
+          </div>
+
+          <div class="baseline-lock" aria-label="Låste baselineantagelser">
+            <h3>Låst Company X baseline</h3>
+            <dl>
+              <div>
+                <dt>Fakturasager</dt>
+                <dd>640k/år</dd>
+              </div>
+              <div>
+                <dt>Adoption</dt>
+                <dd>85%</dd>
+              </div>
+              <div>
+                <dt>Intern timepris</dt>
+                <dd>DKK 280</dd>
+              </div>
+            </dl>
           </div>
         </aside>
       </section>
@@ -564,14 +599,13 @@
         mAnnual: document.getElementById("mAnnual"),
         mHours: document.getElementById("mHours"),
         mNet24: document.getElementById("mNet24"),
-        mJourneys: document.getElementById("mJourneys"),
       };
 
       const state = {
-        investment: 4.8,
+        investment: 5,
         cases: 640000,
         minutes: 3.5,
-        hourCost: 500,
+        hourCost: 280,
         adoption: 85,
         journeys: 3,
       };
@@ -592,7 +626,7 @@
         const hours = (state.cases * state.minutes * (state.adoption / 100)) / 60;
         const annual = (hours * state.hourCost * 1.12) / 1000000;
         const extraJourneys = Math.max(0, state.journeys - 1);
-        const extraInvestment = extraJourneys * 1.2;
+        const extraInvestment = extraJourneys * 1.0;
         const extraAnnual = annual * extraJourneys * 0.62;
         const first = [];
         const scaled = [];
@@ -667,15 +701,11 @@
         els.mAnnual.textContent = dkk(model.annual);
         els.mHours.textContent = compact(model.hours);
         els.mNet24.textContent = dkk(model.net24);
-        els.mJourneys.textContent = String(state.journeys);
       }
 
       function updateOutputs() {
         document.querySelector('[data-out="investment"]').textContent = dkk(state.investment);
-        document.querySelector('[data-out="cases"]').textContent = compact(state.cases);
         document.querySelector('[data-out="minutes"]').textContent = `${state.minutes.toLocaleString("da-DK")} min`;
-        document.querySelector('[data-out="hourCost"]').textContent = `DKK ${state.hourCost}`;
-        document.querySelector('[data-out="adoption"]').textContent = `${state.adoption}%`;
         document.querySelector('[data-out="journeys"]').textContent = String(state.journeys);
       }
 
