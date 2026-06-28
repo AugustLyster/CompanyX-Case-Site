@@ -1,0 +1,694 @@
+<!doctype html>
+<html lang="da">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Company X SIGNAL AGENT - Value curve</title>
+    <style>
+      :root {
+        --navy: #061b3f;
+        --navy-2: #092a5c;
+        --cyan: #00baff;
+        --cyan-soft: #d8f4ff;
+        --ink: #071a3a;
+        --muted: #66748a;
+        --line: #d8e2ee;
+        --paper: #f4f8fc;
+        --white: #ffffff;
+        --shadow: 0 18px 42px rgba(6, 27, 63, 0.12);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        background:
+          linear-gradient(90deg, rgba(0, 186, 255, 0.14), transparent 34%),
+          var(--paper);
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .page {
+        width: min(1480px, calc(100% - 48px));
+        margin: 0 auto;
+        padding: 26px 0 52px;
+      }
+
+      .topbar,
+      .brand,
+      .nav {
+        display: flex;
+        align-items: center;
+      }
+
+      .topbar {
+        justify-content: space-between;
+        gap: 24px;
+        min-height: 72px;
+      }
+
+      .brand {
+        gap: 16px;
+      }
+
+      .logo {
+        width: 56px;
+        height: 56px;
+        border-radius: 8px;
+        box-shadow: 0 12px 25px rgba(6, 27, 63, 0.18);
+      }
+
+      .brand strong {
+        display: block;
+        color: var(--navy);
+        font-size: 24px;
+        line-height: 1;
+      }
+
+      .brand span,
+      .eyebrow,
+      .metric span,
+      .control label,
+      .legend,
+      .phase span {
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .nav {
+        gap: 10px;
+      }
+
+      .nav a {
+        display: inline-flex;
+        align-items: center;
+        min-height: 40px;
+        padding: 0 14px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.84);
+        font-size: 13px;
+        font-weight: 900;
+        text-decoration: none;
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 340px;
+        gap: 20px;
+        align-items: stretch;
+        margin-top: 22px;
+      }
+
+      .hero-main {
+        min-height: 255px;
+        padding: 36px 42px;
+        border-radius: 16px;
+        color: var(--white);
+        background:
+          linear-gradient(100deg, rgba(6, 27, 63, 0.98), rgba(9, 42, 92, 0.92) 58%, rgba(0, 186, 255, 0.28)),
+          var(--navy);
+        box-shadow: var(--shadow);
+      }
+
+      .hero-main .eyebrow {
+        color: var(--cyan);
+      }
+
+      h1 {
+        max-width: 850px;
+        margin: 16px 0 0;
+        font-family: "Arial Narrow", Arial, sans-serif;
+        font-size: clamp(3.4rem, 5vw, 5.6rem);
+        line-height: 0.92;
+        letter-spacing: 0;
+      }
+
+      .hero-main p {
+        max-width: 860px;
+        margin: 24px 0 0;
+        color: rgba(255, 255, 255, 0.82);
+        font-size: 21px;
+        line-height: 1.4;
+      }
+
+      .assumption {
+        display: grid;
+        align-content: center;
+        gap: 18px;
+        padding: 30px;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.94);
+        box-shadow: var(--shadow);
+      }
+
+      .assumption strong {
+        display: block;
+        color: var(--navy);
+        font-size: 42px;
+        line-height: 0.95;
+      }
+
+      .assumption p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 17px;
+        line-height: 1.36;
+      }
+
+      .workspace {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 360px;
+        gap: 18px;
+        margin-top: 18px;
+      }
+
+      .panel {
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.96);
+        box-shadow: var(--shadow);
+      }
+
+      .chart-panel {
+        padding: 30px 34px 28px;
+      }
+
+      .panel-head {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 20px;
+        margin-bottom: 18px;
+      }
+
+      h2 {
+        margin: 8px 0 0;
+        color: var(--navy);
+        font-family: "Arial Narrow", Arial, sans-serif;
+        font-size: 46px;
+        line-height: 0.98;
+      }
+
+      .legend {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        justify-content: flex-end;
+      }
+
+      .legend i {
+        display: inline-block;
+        width: 28px;
+        height: 4px;
+        margin-right: 8px;
+        vertical-align: middle;
+        border-radius: 999px;
+        background: var(--navy);
+      }
+
+      .legend .scaled i {
+        background: var(--cyan);
+      }
+
+      .chart-wrap {
+        position: relative;
+        min-height: 370px;
+        overflow: hidden;
+        border: 1px solid #e0e8f1;
+        border-radius: 14px;
+        background:
+          linear-gradient(90deg, rgba(216, 244, 255, 0.38), transparent 32%),
+          #ffffff;
+      }
+
+      svg {
+        display: block;
+        width: 100%;
+        height: 370px;
+      }
+
+      .callout {
+        position: absolute;
+        right: 24px;
+        top: 24px;
+        width: 230px;
+        padding: 18px 20px;
+        border: 1px solid rgba(0, 186, 255, 0.34);
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.92);
+        box-shadow: 0 10px 24px rgba(6, 27, 63, 0.08);
+      }
+
+      .callout span {
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .callout strong {
+        display: block;
+        margin-top: 8px;
+        color: var(--navy);
+        font-size: 32px;
+        line-height: 1;
+      }
+
+      .metrics {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 12px;
+        margin-top: 16px;
+      }
+
+      .metric {
+        min-height: 118px;
+        padding: 18px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: #ffffff;
+      }
+
+      .metric strong {
+        display: block;
+        margin-top: 10px;
+        color: var(--navy);
+        font-size: 28px;
+        line-height: 1;
+      }
+
+      .controls {
+        padding: 24px;
+      }
+
+      .control {
+        padding: 18px 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .control:first-child {
+        padding-top: 0;
+      }
+
+      .control:last-child {
+        border-bottom: 0;
+        padding-bottom: 0;
+      }
+
+      .control-row {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 14px;
+        margin-bottom: 12px;
+      }
+
+      .control output {
+        color: var(--navy);
+        font-size: 22px;
+        font-weight: 900;
+      }
+
+      input[type="range"] {
+        width: 100%;
+        accent-color: var(--cyan);
+      }
+
+      .timeline {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 12px;
+        margin-top: 18px;
+      }
+
+      .phase {
+        min-height: 92px;
+        padding: 15px 16px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: #ffffff;
+      }
+
+      .phase strong {
+        display: block;
+        margin-top: 9px;
+        color: var(--navy);
+        font-size: 17px;
+        line-height: 1.18;
+      }
+
+      footer {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        margin-top: 32px;
+        padding-top: 20px;
+        color: var(--muted);
+        border-top: 1px solid var(--line);
+        font-size: 14px;
+      }
+
+      @media (max-width: 1120px) {
+        .hero,
+        .workspace {
+          grid-template-columns: 1fr;
+        }
+
+        .metrics,
+        .timeline {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 680px) {
+        .page {
+          width: min(100% - 24px, 640px);
+          padding-top: 16px;
+        }
+
+        .topbar,
+        .nav,
+        .panel-head,
+        footer {
+          align-items: flex-start;
+          display: grid;
+        }
+
+        .hero-main {
+          padding: 30px 24px;
+        }
+
+        h1 {
+          font-size: 3.3rem;
+        }
+
+        .metrics,
+        .timeline {
+          grid-template-columns: 1fr;
+        }
+
+        .callout {
+          position: static;
+          width: auto;
+          margin: 12px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <header class="topbar">
+        <a class="brand" href="../case/" aria-label="Til case overview">
+          <img class="logo" src="../assets/companyx-logo.svg" alt="" aria-hidden="true" />
+          <div>
+            <strong>Company X</strong>
+            <span>SIGNAL AGENT business case</span>
+          </div>
+        </a>
+        <nav class="nav" aria-label="Demo navigation">
+          <a href="../AI/">Agent demo</a>
+          <a href="../dashboard/">Dashboard</a>
+          <a href="../architecture/">Flow</a>
+        </nav>
+      </header>
+
+      <section class="hero">
+        <div class="hero-main">
+          <span class="eyebrow">Interaktiv value curve</span>
+          <h1>Hvornår betaler første SIGNAL AGENT-flow sig hjem?</h1>
+          <p>
+            Modellen viser investering, kumulativ gevinst og skalering fra fakturaflowet til flere servicejourneys.
+            Den er sat op som et ledelsesværktøj, ikke som en perfekt forecast-model.
+          </p>
+        </div>
+        <aside class="assumption">
+          <div>
+            <span class="eyebrow">Default case</span>
+            <strong id="heroPayback">Måned 10</strong>
+          </div>
+          <p>
+            Break-even opstår, når dokumenteret tidsbesparelse i fakturaflowet overstiger den første implementeringsinvestering.
+          </p>
+        </aside>
+      </section>
+
+      <section class="workspace" aria-label="Value curve model">
+        <div class="panel chart-panel">
+          <div class="panel-head">
+            <div>
+              <span class="eyebrow">Kumulativ net value</span>
+              <h2>Investering først, skalering efter proof</h2>
+            </div>
+            <div class="legend" aria-label="Forklaring">
+              <span><i></i>Faktura-flow</span>
+              <span class="scaled"><i></i>Skaleret program</span>
+            </div>
+          </div>
+
+          <div class="chart-wrap">
+            <svg id="curve" viewBox="0 0 920 370" role="img" aria-label="Kumulativ value curve"></svg>
+            <div class="callout">
+              <span>Payback</span>
+              <strong id="paybackLabel">Måned 10</strong>
+            </div>
+          </div>
+
+          <div class="metrics" aria-label="Nøgletal">
+            <div class="metric">
+              <span>Investering</span>
+              <strong id="mInvestment">DKK 4,8m</strong>
+            </div>
+            <div class="metric">
+              <span>Faktura årligt</span>
+              <strong id="mAnnual">DKK 17,8m</strong>
+            </div>
+            <div class="metric">
+              <span>Frigjorte timer</span>
+              <strong id="mHours">31k</strong>
+            </div>
+            <div class="metric">
+              <span>24 mdr. net</span>
+              <strong id="mNet24">DKK 36m</strong>
+            </div>
+            <div class="metric">
+              <span>Skalerede flows</span>
+              <strong id="mJourneys">3</strong>
+            </div>
+          </div>
+
+          <div class="timeline" aria-label="Implementeringstidslinje">
+            <div class="phase"><span>0-2 mdr.</span><strong>Baseline, datakilder og målepunkt</strong></div>
+            <div class="phase"><span>3-5 mdr.</span><strong>Build, integration og pilot</strong></div>
+            <div class="phase"><span>6 mdr.</span><strong>Første dokumenterede effekt</strong></div>
+            <div class="phase"><span>8-10 mdr.</span><strong>Fakturaflow betaler sig hjem</strong></div>
+            <div class="phase"><span>12+ mdr.</span><strong>Genbrug på nye servicejourneys</strong></div>
+          </div>
+        </div>
+
+        <aside class="panel controls" aria-label="Antagelser">
+          <div class="control">
+            <div class="control-row">
+              <label for="investment">Implementering</label>
+              <output data-out="investment">DKK 4,8m</output>
+            </div>
+            <input id="investment" data-key="investment" type="range" min="3" max="8" step="0.1" value="4.8" />
+          </div>
+
+          <div class="control">
+            <div class="control-row">
+              <label for="cases">Fakturasager pr. år</label>
+              <output data-out="cases">640k</output>
+            </div>
+            <input id="cases" data-key="cases" type="range" min="500000" max="750000" step="10000" value="640000" />
+          </div>
+
+          <div class="control">
+            <div class="control-row">
+              <label for="minutes">Minutter sparet pr. sag</label>
+              <output data-out="minutes">3,5 min</output>
+            </div>
+            <input id="minutes" data-key="minutes" type="range" min="2" max="5" step="0.1" value="3.5" />
+          </div>
+
+          <div class="control">
+            <div class="control-row">
+              <label for="hourCost">Fuldt lastet timepris</label>
+              <output data-out="hourCost">DKK 500</output>
+            </div>
+            <input id="hourCost" data-key="hourCost" type="range" min="400" max="600" step="10" value="500" />
+          </div>
+
+          <div class="control">
+            <div class="control-row">
+              <label for="adoption">Adoption i flowet</label>
+              <output data-out="adoption">85%</output>
+            </div>
+            <input id="adoption" data-key="adoption" type="range" min="60" max="95" step="5" value="85" />
+          </div>
+
+          <div class="control">
+            <div class="control-row">
+              <label for="journeys">Servicejourneys i program</label>
+              <output data-out="journeys">3</output>
+            </div>
+            <input id="journeys" data-key="journeys" type="range" min="1" max="4" step="1" value="3" />
+          </div>
+        </aside>
+      </section>
+
+      <footer>
+        <span>© 2026 KPMG P/S · Arbejdsmateriale til Company X case</span>
+        <strong>Company X SIGNAL AGENT</strong>
+      </footer>
+    </main>
+
+    <script>
+      const svg = document.getElementById("curve");
+      const els = {
+        heroPayback: document.getElementById("heroPayback"),
+        paybackLabel: document.getElementById("paybackLabel"),
+        mInvestment: document.getElementById("mInvestment"),
+        mAnnual: document.getElementById("mAnnual"),
+        mHours: document.getElementById("mHours"),
+        mNet24: document.getElementById("mNet24"),
+        mJourneys: document.getElementById("mJourneys"),
+      };
+
+      const state = {
+        investment: 4.8,
+        cases: 640000,
+        minutes: 3.5,
+        hourCost: 500,
+        adoption: 85,
+        journeys: 3,
+      };
+
+      function dkk(value) {
+        return `DKK ${value.toLocaleString("da-DK", { maximumFractionDigits: 1 })}m`;
+      }
+
+      function compact(value) {
+        return `${Math.round(value / 1000).toLocaleString("da-DK")}k`;
+      }
+
+      function clamp(value, min, max) {
+        return Math.max(min, Math.min(max, value));
+      }
+
+      function calculate() {
+        const hours = (state.cases * state.minutes * (state.adoption / 100)) / 60;
+        const annual = (hours * state.hourCost * 1.12) / 1000000;
+        const extraJourneys = Math.max(0, state.journeys - 1);
+        const extraInvestment = extraJourneys * 1.2;
+        const extraAnnual = annual * extraJourneys * 0.62;
+        const first = [];
+        const scaled = [];
+        let cumFirst = 0;
+        let cumScaled = 0;
+
+        for (let month = 0; month <= 24; month += 1) {
+          const firstSpend = month <= 5 ? state.investment / 6 : 0;
+          const firstRamp = clamp((month - 5) / 4, 0, 1);
+          const firstGain = (annual / 12) * firstRamp;
+          cumFirst += firstGain - firstSpend;
+
+          const scaleSpend = month >= 10 && month <= 15 ? extraInvestment / 6 : 0;
+          const scaleRamp = clamp((month - 12) / 6, 0, 1);
+          const scaleGain = (extraAnnual / 12) * scaleRamp;
+          cumScaled += firstGain + scaleGain - firstSpend - scaleSpend;
+
+          first.push({ month, value: cumFirst });
+          scaled.push({ month, value: cumScaled });
+        }
+
+        const payback = first.find((point) => point.value >= 0)?.month ?? 24;
+        return {
+          annual,
+          hours,
+          first,
+          scaled,
+          payback,
+          net24: scaled[scaled.length - 1].value,
+        };
+      }
+
+      function pathFrom(points, x, y) {
+        return points.map((point, index) => `${index === 0 ? "M" : "L"} ${x(point.month)} ${y(point.value)}`).join(" ");
+      }
+
+      function draw() {
+        const model = calculate();
+        const values = [...model.first, ...model.scaled].map((p) => p.value);
+        const minValue = Math.min(-state.investment - 1.5, ...values);
+        const maxValue = Math.max(18, ...values) + 3;
+        const chart = { left: 70, top: 26, width: 790, height: 286 };
+        const x = (month) => chart.left + (month / 24) * chart.width;
+        const y = (value) => chart.top + ((maxValue - value) / (maxValue - minValue)) * chart.height;
+        const zeroY = y(0);
+        const paybackX = x(model.payback);
+
+        let html = "";
+        for (let i = 0; i <= 4; i += 1) {
+          const value = minValue + ((maxValue - minValue) / 4) * i;
+          const gy = y(value);
+          html += `<line x1="${chart.left}" y1="${gy}" x2="${chart.left + chart.width}" y2="${gy}" stroke="#e4ebf3" stroke-width="1" />`;
+          html += `<text x="18" y="${gy + 5}" fill="#66748a" font-size="13" font-family="Arial">${Math.round(value)}m</text>`;
+        }
+        for (let month = 0; month <= 24; month += 6) {
+          const gx = x(month);
+          html += `<line x1="${gx}" y1="${chart.top}" x2="${gx}" y2="${chart.top + chart.height}" stroke="#edf2f7" stroke-width="1" />`;
+          html += `<text x="${gx - 18}" y="346" fill="#66748a" font-size="13" font-family="Arial">${month} mdr.</text>`;
+        }
+        html += `<line x1="${chart.left}" y1="${zeroY}" x2="${chart.left + chart.width}" y2="${zeroY}" stroke="#061b3f" stroke-width="1.5" opacity="0.55" />`;
+        html += `<path d="${pathFrom(model.first, x, y)}" fill="none" stroke="#061b3f" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />`;
+        html += `<path d="${pathFrom(model.scaled, x, y)}" fill="none" stroke="#00baff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />`;
+        html += `<line x1="${paybackX}" y1="${chart.top}" x2="${paybackX}" y2="${chart.top + chart.height}" stroke="#00baff" stroke-width="2" stroke-dasharray="7 8" />`;
+        html += `<circle cx="${paybackX}" cy="${y(model.first[model.payback].value)}" r="7" fill="#00baff" stroke="#ffffff" stroke-width="3" />`;
+        html += `<text x="${paybackX + 12}" y="${y(model.first[model.payback].value) - 10}" fill="#061b3f" font-size="15" font-weight="700" font-family="Arial">payback</text>`;
+        html += `<text x="70" y="24" fill="#66748a" font-size="13" font-family="Arial">DKK mio.</text>`;
+        svg.innerHTML = html;
+
+        els.heroPayback.textContent = `Måned ${model.payback}`;
+        els.paybackLabel.textContent = `Måned ${model.payback}`;
+        els.mInvestment.textContent = dkk(state.investment);
+        els.mAnnual.textContent = dkk(model.annual);
+        els.mHours.textContent = compact(model.hours);
+        els.mNet24.textContent = dkk(model.net24);
+        els.mJourneys.textContent = String(state.journeys);
+      }
+
+      function updateOutputs() {
+        document.querySelector('[data-out="investment"]').textContent = dkk(state.investment);
+        document.querySelector('[data-out="cases"]').textContent = compact(state.cases);
+        document.querySelector('[data-out="minutes"]').textContent = `${state.minutes.toLocaleString("da-DK")} min`;
+        document.querySelector('[data-out="hourCost"]').textContent = `DKK ${state.hourCost}`;
+        document.querySelector('[data-out="adoption"]').textContent = `${state.adoption}%`;
+        document.querySelector('[data-out="journeys"]').textContent = String(state.journeys);
+      }
+
+      document.querySelectorAll("[data-key]").forEach((input) => {
+        input.addEventListener("input", () => {
+          state[input.dataset.key] = Number(input.value);
+          updateOutputs();
+          draw();
+        });
+      });
+
+      updateOutputs();
+      draw();
+    </script>
+  </body>
+</html>
