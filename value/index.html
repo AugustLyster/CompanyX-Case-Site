@@ -247,13 +247,25 @@
       }
 
       .chart-caption {
-        position: absolute;
-        left: 30px;
-        top: 24px;
-        max-width: 360px;
+        display: grid;
+        gap: 6px;
+        margin: 0 0 14px;
+        padding: 14px 16px;
+        border: 1px solid rgba(0, 186, 255, 0.26);
+        border-left: 6px solid var(--cyan);
+        border-radius: 12px;
+        background: linear-gradient(90deg, rgba(216, 244, 255, 0.72), rgba(255, 255, 255, 0.94));
         color: var(--muted);
         font-size: 15px;
         line-height: 1.35;
+      }
+
+      .chart-caption strong {
+        color: var(--navy);
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
       }
 
       .slider-panel {
@@ -513,11 +525,14 @@
             </div>
           </div>
 
-          <div class="chart" aria-label="Kumulativ værdikurve">
-            <p class="chart-caption">
+          <p class="chart-caption">
+            <strong>Sådan læses kurven</strong>
+            <span>
               Kurven er negativ under implementering. Når den passerer break-even, er første
               fakturaflow betalt hjem. Efter måned 12 accelererer værdien med genbrug på nye journeys.
-            </p>
+            </span>
+          </p>
+          <div class="chart" aria-label="Kumulativ værdikurve">
             <svg id="curve" viewBox="0 0 920 420" role="img" aria-label="Kumulativ nettoværdi over 24 måneder"></svg>
           </div>
 
