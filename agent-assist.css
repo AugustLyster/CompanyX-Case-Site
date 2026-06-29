@@ -304,7 +304,10 @@ input {
 
 .call-panel,
 .signal-panel-main,
-.answer-panel > div {
+.answer-card,
+.note-card,
+.finish-card,
+.source-card {
   border: 1px solid rgba(6, 27, 63, 0.12);
   border-radius: 18px;
   background: rgba(255, 255, 255, 0.94);
@@ -922,8 +925,17 @@ input {
   align-items: start;
 }
 
-.answer-panel > div {
+.answer-card,
+.note-card,
+.finish-card,
+.source-card {
   padding: 22px;
+}
+
+.action-stack {
+  display: grid;
+  gap: 18px;
+  align-content: start;
 }
 
 .answer-card {
@@ -1334,14 +1346,9 @@ input {
     grid-row: 1 / span 2;
   }
 
-  .finish-card {
+  .action-stack {
     grid-column: 3;
     grid-row: 1;
-  }
-
-  .source-card {
-    grid-column: 3;
-    grid-row: 2;
   }
 
   .dashboard-grid {
@@ -1374,8 +1381,7 @@ input {
   }
 
   .answer-card,
-  .finish-card,
-  .source-card {
+  .action-stack {
     grid-column: auto;
     grid-row: auto;
   }
@@ -1453,7 +1459,10 @@ input {
   .agent-hero,
   .call-panel,
   .signal-panel-main,
-  .answer-panel > div {
+  .answer-card,
+  .note-card,
+  .finish-card,
+  .source-card {
     padding: 18px;
   }
 
