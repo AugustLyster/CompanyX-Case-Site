@@ -919,6 +919,7 @@ input {
   display: grid;
   gap: 18px;
   align-content: start;
+  align-items: start;
 }
 
 .answer-panel > div {
@@ -1312,11 +1313,35 @@ input {
 
   .answer-panel {
     grid-column: 1 / -1;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns:
+      minmax(280px, 0.9fr)
+      minmax(500px, 1.55fr)
+      minmax(280px, 0.9fr);
+    align-items: start;
   }
 
   .answer-panel > div {
-    min-height: 100%;
+    min-height: 0;
+  }
+
+  .answer-card {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .note-card {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+  }
+
+  .finish-card {
+    grid-column: 3;
+    grid-row: 1;
+  }
+
+  .source-card {
+    grid-column: 3;
+    grid-row: 2;
   }
 
   .dashboard-grid {
@@ -1346,6 +1371,18 @@ input {
 
   .answer-panel {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .answer-card,
+  .finish-card,
+  .source-card {
+    grid-column: auto;
+    grid-row: auto;
+  }
+
+  .note-card {
+    grid-column: 1 / -1;
+    grid-row: auto;
   }
 }
 
@@ -1387,6 +1424,10 @@ input {
   .workflow-options,
   .answer-panel {
     grid-template-columns: 1fr;
+  }
+
+  .note-card {
+    grid-column: auto;
   }
 }
 
