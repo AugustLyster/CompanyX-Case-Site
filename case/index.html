@@ -272,6 +272,24 @@
         content: "";
       }
 
+      .card::after {
+        position: absolute;
+        top: 20px;
+        right: 22px;
+        display: grid;
+        place-items: center;
+        width: 42px;
+        height: 42px;
+        color: var(--navy);
+        border: 1px solid rgba(0, 186, 255, 0.28);
+        border-radius: 50%;
+        background: rgba(216, 245, 248, 0.78);
+        content: attr(data-step);
+        font-size: 14px;
+        font-weight: 900;
+        letter-spacing: 0.02em;
+      }
+
       .card:hover {
         border-color: rgba(0, 186, 255, 0.5);
         box-shadow: 0 20px 42px rgba(6, 27, 63, 0.14);
@@ -297,12 +315,19 @@
         background: linear-gradient(145deg, var(--navy), var(--navy-2));
       }
 
+      .card.dark::after {
+        color: var(--white);
+        border-color: rgba(255, 255, 255, 0.28);
+        background: rgba(255, 255, 255, 0.12);
+      }
+
       .card.dark span,
       .card.dark p {
         color: rgba(255, 255, 255, 0.72);
       }
 
       .card h3 {
+        max-width: calc(100% - 58px);
         margin: 13px 0 0;
         color: var(--navy);
         font-size: 27px;
@@ -465,13 +490,13 @@
         <div class="section-title">
           <h2>Materiale og demo</h2>
           <p>
-            Her ligger de vigtigste demo-brikker samlet: intern agent,
-            teamdashboard, bagvedliggende flow og det færdige PowerPoint-deck.
+            Åbn brikkerne i rækkefølge: live-demo først, effektmåling bagefter,
+            business case, bagvedliggende flow og til sidst det færdige deck.
           </p>
         </div>
 
         <div class="card-grid">
-          <a class="card dark" href="../AI/">
+          <a class="card dark" href="../AI/" data-step="01">
             <span>Live demo</span>
             <h3>Company X SIGNAL AGENT</h3>
             <p>Internt agentværktøj hvor Mikkel slår kunden op, får forklaring, muligt svar og sagsnotat.</p>
@@ -480,7 +505,7 @@
             </div>
           </a>
 
-          <a class="card" href="../dashboard/">
+          <a class="card" href="../dashboard/" data-step="02">
             <span>Team view</span>
             <h3>SIGNAL AGENT dashboard</h3>
             <p>Viser hvordan teamet kan følge håndteringstid, kundetilfredshed, first-contact resolution og frigjort tid.</p>
@@ -489,7 +514,7 @@
             </div>
           </a>
 
-          <a class="card" href="../value/">
+          <a class="card" href="../value/" data-step="03">
             <span>Value curve</span>
             <h3>Interaktiv business case</h3>
             <p>Viser investering, payback og kumulativ gevinst, når fakturaflowet skaleres til flere servicejourneys.</p>
@@ -498,7 +523,7 @@
             </div>
           </a>
 
-          <a class="card" href="../architecture/">
+          <a class="card" href="../architecture/" data-step="04">
             <span>Behind the scenes</span>
             <h3>Voice og data-flow</h3>
             <p>Forklarer hvordan contact center, live transcript, SIGNAL AGENT og datakilder hænger sammen.</p>
@@ -507,7 +532,7 @@
             </div>
           </a>
 
-          <a class="card muted" href="../assets/companyx-kpmg-case-deck.pptx" download>
+          <a class="card muted" href="../assets/companyx-kpmg-case-deck.pptx" download data-step="05">
             <span>Presentation</span>
             <h3>Endeligt case deck</h3>
             <p>Færdig PowerPoint med personaer, rich picture, demo-storyline, business case og anbefaling.</p>
