@@ -8,8 +8,8 @@
       :root {
         --navy: #061b3f;
         --navy-2: #092a5c;
-        --cyan: #2fc3d7;
-        --cyan-soft: #d8f5f8;
+        --cyan: #00baff;
+        --cyan-soft: #d8f4ff;
         --ink: #071a3a;
         --muted: #66728a;
         --line: #d8e2ee;
@@ -37,9 +37,9 @@
         width: 100%;
         min-height: 100vh;
         margin: 0 auto;
-        overflow: hidden;
+        overflow: visible;
         background:
-          linear-gradient(90deg, rgba(216, 245, 248, 0.62), transparent 28%),
+          linear-gradient(90deg, rgba(216, 244, 255, 0.62), transparent 28%),
           var(--white);
       }
 
@@ -194,9 +194,9 @@
         display: block;
         padding: 11px 13px;
         color: var(--navy);
-        border: 1px solid rgba(47, 195, 215, 0.32);
+        border: 1px solid rgba(0, 186, 255, 0.32);
         border-radius: 9px;
-        background: rgba(216, 245, 248, 0.6);
+        background: rgba(216, 244, 255, 0.6);
         font-size: 16px;
       }
 
@@ -266,27 +266,11 @@
         font-size: 19px;
       }
 
-      .footer {
-        position: absolute;
-        right: 92px;
-        bottom: 46px;
-        display: flex;
-        gap: 16px;
-        align-items: center;
-        color: #8b8f97;
-        font-size: 14px;
-      }
-
-      .footer b {
-        color: var(--navy);
-        font-size: 20px;
-      }
-
       @media (max-width: 1200px) {
         .slide {
           width: 100%;
           min-height: auto;
-          padding-bottom: 70px;
+          padding-bottom: 42px;
         }
 
         .topbar,
@@ -313,11 +297,6 @@
           display: none;
         }
 
-        .footer {
-          position: static;
-          justify-content: flex-end;
-          margin: 36px 28px 0;
-        }
       }
     </style>
   </head>
@@ -331,13 +310,13 @@
             <span>Intern agentarkitektur</span>
           </div>
         </div>
-        <div class="classification">Dokumentklassifikation: KPMG fortroligt</div>
+        <div class="classification">Løsningsarkitektur</div>
       </div>
 
       <div class="kicker">Bagvedliggende løsningsflow</div>
-      <h1>Voice, transskription og data samles før Mikkel får svaret</h1>
+      <h1>Voice, data og efterbehandling samles i ét internt flow</h1>
       <p class="lead">
-        Telefonnummeret identificerer kunden. Den transskriberede samtale identificerer spørgsmålet. SIGNAL AGENT orkestrerer derefter opslag, forklaring og sagsnotat med human approval.
+        Opkaldet matcher kunden, transskriptionen fanger spørgsmålet, og SIGNAL AGENT henter kun de relevante datakilder. Mikkel godkender svaret, mens afslutningen skriver sagsnotat, årsagskode og KPI-data tilbage.
       </p>
 
       <div class="architecture">
@@ -397,12 +376,13 @@
 
         <article class="lane">
           <span class="eyebrow">05 Agent workspace</span>
-          <h2>Mikkel godkender</h2>
-          <p>SIGNAL AGENT viser årsag, muligt svar, kilder og sagsnotat. Kunden kontaktes først, når Mikkel godkender.</p>
+          <h2>Mikkel godkender og afslutter</h2>
+          <p>SIGNAL AGENT viser årsag, muligt svar, kilder og sagsnotat. Når sagen afsluttes, gemmes outcome i CRM og dashboard.</p>
           <div class="data-list">
             <b>Forklaring</b>
             <b>Svarforslag</b>
-            <b>Sagsnotat</b>
+            <b>Sagsnotat og årsagskode</b>
+            <b>CRM/dashboard writeback</b>
           </div>
         </article>
 
@@ -420,17 +400,11 @@
           </p>
         </div>
         <div class="governance-card">
-          <strong>Governance by design</strong>
+          <strong>Efterbehandling og governance</strong>
           <p>
-            SIGNAL AGENT sender ikke automatisk svar til kunden. Medarbejderen godkender, og alle kilder gemmes i audit-log og CRM.
+            SIGNAL AGENT sender ikke automatisk svar til kunden. Efter godkendelse gemmes sagsnotat, kilder, tidsforbrug, outcome og FCR-markering i CRM og dashboard.
           </p>
         </div>
-      </div>
-
-      <div class="footer">
-        <span>Company X transformation</span>
-        <span>|</span>
-        <b>Architecture</b>
       </div>
     </section>
   </body>
